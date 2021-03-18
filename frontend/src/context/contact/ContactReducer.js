@@ -18,7 +18,7 @@ import {
   CLEAR_ERRORS,
   CLEAR_CONTACTS,
   CLEAR_MESSAGES,
-} from "../types";
+} from '../types';
 
 const ContactReducer = (state, action) => {
   switch (action.type) {
@@ -51,7 +51,9 @@ const ContactReducer = (state, action) => {
       return {
         ...state,
         filtered: state.contacts.filter((contact) => {
-          return contact.name.toLowerCase().includes(action.payload);
+          return contact.name
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
         }),
       };
     case CLEAR_FILTER:
@@ -68,7 +70,7 @@ const ContactReducer = (state, action) => {
         // filtered:
         //   state.filtered !== null ? [action.payload, ...state.filtered] : null,
         addLoading: false,
-        message: "Contact Added Successfully ...",
+        message: 'Contact Added Successfully ...',
       };
     case ADD_CONTACT_FAIL:
       return {
@@ -89,7 +91,7 @@ const ContactReducer = (state, action) => {
             ? state.filtered.filter((contact) => action.payload !== contact._id)
             : null,
         deleteLoading: false,
-        message: "Contact Deleted Successfully ...",
+        message: 'Contact Deleted Successfully ...',
       };
     case DELETE_CONTACT_FAIL:
       return {
@@ -112,7 +114,7 @@ const ContactReducer = (state, action) => {
               )
             : null,
         addLoading: false,
-        message: "Contact Updated Successfully ...",
+        message: 'Contact Updated Successfully ...',
       };
     case UPDATE_CONTACT_FAIL:
       return {
