@@ -1,0 +1,70 @@
+$theme-colors: (
+  "primary": #003699,
+  "light": #f4f4f4,
+  "dark": #333333,
+  "danger": #dc3545,
+  "success": #28a745,
+  "info": lightblue,
+);
+
+// $border-radius: 10rem;
+
+$color: white;
+
+@import "bootstrap/scss/bootstrap";
+
+main {
+  min-height: 80vh;
+  margin: 50px auto;
+}
+
+#cover-spin {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(88, 86, 86, 0.212);
+  z-index: 9999;
+  // display: none;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#cover-spin::after {
+  content: "";
+  // content: url("../public/logo192.png");
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 80px;
+  height: 80px;
+  border-style: solid;
+  border-color: black;
+  border-top-color: transparent;
+  border-width: 6px;
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+  margin-top: -70px;
+  margin-left: -50px;
+}
