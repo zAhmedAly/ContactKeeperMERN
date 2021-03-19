@@ -6,14 +6,14 @@ import ContactContext from '../context/contact/ContactContext';
 
 const AddEditContact = () => {
   const [contact, setContact] = useState({
-    id: '',
+    _id: '',
     name: '',
     email: '',
     phone: '',
     type: 'personal',
   });
 
-  const { name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = contact;
 
   const contactContext = useContext(ContactContext);
 
@@ -44,6 +44,7 @@ const AddEditContact = () => {
         setOpen(true);
       } else {
         setContact({
+          _id: '',
           name: '',
           email: '',
           phone: '',
@@ -72,6 +73,9 @@ const AddEditContact = () => {
       addContact(contact);
     } else {
       updateContact(contact);
+      {
+        /* document.getElementById(`card${_id}`).scrollIntoView(); */
+      }
     }
     clearFormWide();
     setOpen(false);
@@ -79,7 +83,7 @@ const AddEditContact = () => {
 
   const clearForm = () => {
     setContact({
-      id: '',
+      _id: '',
       name: '',
       email: '',
       phone: '',
@@ -91,7 +95,7 @@ const AddEditContact = () => {
 
   const clearFormWide = () => {
     setContact({
-      id: '',
+      _id: '',
       name: '',
       email: '',
       phone: '',
