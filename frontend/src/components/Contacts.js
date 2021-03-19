@@ -5,10 +5,10 @@ import ContactContext from "../context/contact/ContactContext";
 import SearchContacts from "./SearchContacts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
+import Alerts from "./Alerts";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
-
   const {
     contacts,
     filtered,
@@ -91,7 +91,7 @@ const Contacts = () => {
       </h3>
 
       <SearchContacts />
-      {/* {!contactsLoading && <Alerts />} */}
+      {!contactsLoading && <Alerts />}
 
       {!contactsLoading &&
         (contacts !== null && contacts.length > 0 ? (

@@ -18,7 +18,7 @@ import {
   CLEAR_ERRORS,
   CLEAR_CONTACTS,
   CLEAR_MESSAGES,
-} from '../types';
+} from "../types";
 
 const ContactReducer = (state, action) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ const ContactReducer = (state, action) => {
     case GET_CONTACTS_SUCCESS:
       return {
         ...state,
-        contacts: action.payload,
+        contacts: action.payload.sort((a, b) => (a.name > b.name ? 1 : -1)),
         contactsLoading: false,
       };
     case GET_CONTACTS_FAIL:
@@ -64,13 +64,12 @@ const ContactReducer = (state, action) => {
     case ADD_CONTACT_REQUEST:
       return { ...state, addLoading: true };
     case ADD_CONTACT_SUCCESS:
+      const contactsList = [action.payload, ...state.contacts];
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts],
-        // filtered:
-        //   state.filtered !== null ? [action.payload, ...state.filtered] : null,
+        contacts: contactsList.sort((a, b) => (a.name > b.name ? 1 : -1)),
         addLoading: false,
-        message: 'Contact Added Successfully ...',
+        message: "Contact Added Successfully ...",
       };
     case ADD_CONTACT_FAIL:
       return {
@@ -91,7 +90,7 @@ const ContactReducer = (state, action) => {
             ? state.filtered.filter((contact) => action.payload !== contact._id)
             : null,
         deleteLoading: false,
-        message: 'Contact Deleted Successfully ...',
+        message: "Contact Deleted Successfully ...",
       };
     case DELETE_CONTACT_FAIL:
       return {
@@ -104,17 +103,21 @@ const ContactReducer = (state, action) => {
     case UPDATE_CONTACT_SUCCESS:
       return {
         ...state,
-        contacts: state.contacts.map((contact) =>
-          contact._id === action.payload._id ? action.payload : contact
-        ),
+        contacts: state.contacts
+          .map((contact) =>
+            contact._id === action.payload._id ? action.payload : contact
+          )
+          .sort((a, b) => (a.name > b.name ? 1 : -1)),
         filtered:
           state.filtered !== null
-            ? state.filtered.map((contact) =>
-                contact._id === action.payload._id ? action.payload : contact
-              )
+            ? state.filtered
+                .map((contact) =>
+                  contact._id === action.payload._id ? action.payload : contact
+                )
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
             : null,
         addLoading: false,
-        message: 'Contact Updated Successfully ...',
+        message: "Contact Updated Successfully ...",
       };
     case UPDATE_CONTACT_FAIL:
       return {

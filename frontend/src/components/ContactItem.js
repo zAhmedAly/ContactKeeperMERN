@@ -17,6 +17,12 @@ const ContactItem = ({ contact }) => {
   const onDelete = () => {
     deleteContact(_id);
     clearCurrent();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const onUpdate = () => {
+    setCurrent(contact);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -75,7 +81,7 @@ const ContactItem = ({ contact }) => {
             alignItems: "center",
             margin: "0 0.2rem",
           }}
-          onClick={() => setCurrent(contact)}
+          onClick={onUpdate}
         >
           <FaEdit
             style={{

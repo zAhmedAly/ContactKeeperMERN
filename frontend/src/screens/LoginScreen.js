@@ -12,7 +12,7 @@ const LoginScreen = ({ history, location }) => {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !loading) {
       history.push("/");
     }
 
@@ -52,58 +52,61 @@ const LoginScreen = ({ history, location }) => {
 
   return (
     <>
-      {loading && <div id="cover-spin"></div>}
-      <Row>
-        <Col></Col>
-        <Col md={6}>
-          <h2
-            className="my-2"
-            style={{ color: "darkblue", textAlign: "center" }}
-          >
-            <strong>User Login</strong>
-          </h2>
-          <Alerts />
-          <Card className="mb-3">
-            <Card.Body>
-              <Form onSubmit={onSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address *</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={email}
-                    placeholder="user@example.com"
-                    onChange={onChange}
-                  />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password *</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="Enter Password ..."
-                    onChange={onChange}
-                  />
-                </Form.Group>
+      {loading ? (
+        <div id="cover-spin"></div>
+      ) : (
+        <Row>
+          <Col></Col>
+          <Col md={6}>
+            <h2
+              className="my-2"
+              style={{ color: "darkblue", textAlign: "center" }}
+            >
+              <strong>User Login</strong>
+            </h2>
+            <Alerts />
+            <Card className="mb-3">
+              <Card.Body>
+                <Form onSubmit={onSubmit}>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address *</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={email}
+                      placeholder="user@example.com"
+                      onChange={onChange}
+                    />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password *</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      value={password}
+                      placeholder="Enter Password ..."
+                      onChange={onChange}
+                    />
+                  </Form.Group>
 
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="btn-block"
-                  // disabled={!email || !password}
-                >
-                  {loading ? "LoggingIn ..." : "User Login"}
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col></Col>
-      </Row>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block"
+                    // disabled={!email || !password}
+                  >
+                    {loading ? "LoggingIn ..." : "User Login"}
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col></Col>
+        </Row>
+      )}
     </>
   );
 };
