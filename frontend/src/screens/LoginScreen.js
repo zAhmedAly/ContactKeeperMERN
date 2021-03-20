@@ -19,7 +19,7 @@ const LoginScreen = ({ history, location }) => {
     if (error) {
       let errMsg = error;
       if (error === "Internal Server Error") {
-        errMsg = `${error} ... Please Try again`;
+        errMsg = `Not able to connect, Please try again`;
       }
       setAlert(errMsg, "danger");
       clearErrors();
@@ -40,6 +40,7 @@ const LoginScreen = ({ history, location }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (email === "" || password === "") {
       setAlert("Please fill in all fields", "danger");
     } else {
@@ -48,6 +49,7 @@ const LoginScreen = ({ history, location }) => {
         password,
       });
     }
+    clearErrors();
   };
 
   return (

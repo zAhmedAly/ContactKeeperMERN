@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Button, Card, Col, Form, Row } from 'react-bootstrap';
-import Alerts from '../components/Alerts';
-import AlertContext from '../context/alert/AlertContext';
-import AuthContext from '../context/auth/AuthContext';
+import React, { useState, useContext, useEffect } from "react";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import Alerts from "../components/Alerts";
+import AlertContext from "../context/alert/AlertContext";
+import AuthContext from "../context/auth/AuthContext";
 
 const RegisterScreen = ({ history }) => {
   const [registerData, setRegisterData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    cpassword: '',
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
   });
 
   const { name, email, password, cpassword } = registerData;
@@ -32,15 +32,15 @@ const RegisterScreen = ({ history }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/');
+      history.push("/");
     }
 
     if (error) {
       let errMsg = error;
-      if (error === 'Internal Server Error') {
-        errMsg = `${error} ... Please Try again`;
+      if (error === "Internal Server Error") {
+        errMsg = `Not able to connect, Please try again`;
       }
-      setAlert(errMsg, 'danger');
+      setAlert(errMsg, "danger");
       clearErrors();
     }
     // eslint-disable-next-line
@@ -48,8 +48,9 @@ const RegisterScreen = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (password !== cpassword) {
-      setAlert('Passwords do not match', 'danger');
+      setAlert("Passwords do not match", "danger");
     } else {
       register({
         name,
@@ -61,71 +62,71 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <>
-      {loading && <div id='cover-spin'></div>}
+      {loading && <div id="cover-spin"></div>}
       <Row>
         <Col></Col>
         <Col md={6}>
           <h2
-            className='my-2'
-            style={{ color: 'darkblue', textAlign: 'center' }}
+            className="my-2"
+            style={{ color: "darkblue", textAlign: "center" }}
           >
             <strong>Register User</strong>
           </h2>
           <Alerts />
-          <Card className='mb-3'>
+          <Card className="mb-3">
             <Card.Body>
               <Form onSubmit={onSubmit}>
-                <Form.Group controlId='formBasicContactName'>
+                <Form.Group controlId="formBasicContactName">
                   <Form.Label>Name *</Form.Label>
                   <Form.Control
-                    type='text'
-                    name='name'
+                    type="text"
+                    name="name"
                     value={name}
-                    placeholder='Enter user name'
+                    placeholder="Enter user name"
                     onChange={onChange}
                   />
                 </Form.Group>
-                <Form.Group controlId='formBasicEmail'>
+                <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address *</Form.Label>
                   <Form.Control
-                    type='email'
-                    name='email'
+                    type="email"
+                    name="email"
                     value={email}
-                    placeholder='user@example.com'
+                    placeholder="user@example.com"
                     onChange={onChange}
                   />
-                  <Form.Text className='text-muted'>
+                  <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
                 </Form.Group>
-                <Form.Group controlId='formBasicPassword'>
+                <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password *</Form.Label>
                   <Form.Control
-                    type='password'
-                    name='password'
+                    type="password"
+                    name="password"
                     value={password}
-                    placeholder='Enter Password ...'
+                    placeholder="Enter Password ..."
                     onChange={onChange}
                   />
                 </Form.Group>
-                <Form.Group controlId='formBasicCPassword'>
+                <Form.Group controlId="formBasicCPassword">
                   <Form.Label>Confirm Password *</Form.Label>
                   <Form.Control
-                    type='password'
-                    name='cpassword'
+                    type="password"
+                    name="cpassword"
                     value={cpassword}
-                    placeholder='Confirm Password ...'
+                    placeholder="Confirm Password ..."
                     onChange={onChange}
                   />
                 </Form.Group>
 
                 <Button
-                  variant='primary'
-                  type='submit'
-                  className='btn-block'
+                  variant="primary"
+                  type="submit"
+                  className="btn-block"
                   disabled={!name || !email || !password || !cpassword}
                 >
-                  {loading ? 'Saving ...' : 'Register User'}
+                  {loading ? "Saving ..." : "Register User"}
                 </Button>
               </Form>
             </Card.Body>

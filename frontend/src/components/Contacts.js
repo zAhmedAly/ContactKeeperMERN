@@ -38,8 +38,8 @@ const Contacts = () => {
     if (error) {
       let errMsg = error;
       if (error === "Internal Server Error") {
-        errMsg = `${error} ... Please Try again`;
-      } else if (error === "Session Expired, please Login") {
+        errMsg = `Not able to connect, Please try again`;
+      } else if (error === "Session Expired, Please Login") {
         clearContacts();
         clearFilter();
         logout();
@@ -50,7 +50,6 @@ const Contacts = () => {
       setAlert(message, "success");
       clearMessages();
     }
-
     // eslint-disable-next-line
   }, [error, message]);
 
@@ -66,7 +65,7 @@ const Contacts = () => {
         }}
       >
         {" "}
-        <strong> Your Contacts</strong>
+        <strong>Your Contacts</strong>
         {!contactsLoading && contacts !== null && (
           <Badge
             style={{
@@ -90,7 +89,8 @@ const Contacts = () => {
         )}
       </h3>
 
-      <SearchContacts />
+      {contacts !== null && <SearchContacts />}
+
       {!contactsLoading && <Alerts />}
 
       {!contactsLoading &&

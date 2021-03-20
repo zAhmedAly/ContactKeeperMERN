@@ -69,7 +69,7 @@ const ContactReducer = (state, action) => {
         ...state,
         contacts: contactsList.sort((a, b) => (a.name > b.name ? 1 : -1)),
         addLoading: false,
-        message: "Contact Added Successfully ...",
+        message: "Contact Added Successfully",
       };
     case ADD_CONTACT_FAIL:
       return {
@@ -90,7 +90,7 @@ const ContactReducer = (state, action) => {
             ? state.filtered.filter((contact) => action.payload !== contact._id)
             : null,
         deleteLoading: false,
-        message: "Contact Deleted Successfully ...",
+        message: "Contact Deleted Successfully",
       };
     case DELETE_CONTACT_FAIL:
       return {
@@ -117,7 +117,7 @@ const ContactReducer = (state, action) => {
                 .sort((a, b) => (a.name > b.name ? 1 : -1))
             : null,
         addLoading: false,
-        message: "Contact Updated Successfully ...",
+        message: "Contact Updated Successfully",
       };
     case UPDATE_CONTACT_FAIL:
       return {

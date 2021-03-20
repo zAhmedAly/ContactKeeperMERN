@@ -13,7 +13,6 @@ const HomeScreen = () => {
   const { loadUser } = authContext;
 
   useEffect(() => {
-    console.log("HomeScreen loadUser ....");
     loadUser();
     // eslint-disable-next-line
   }, []);

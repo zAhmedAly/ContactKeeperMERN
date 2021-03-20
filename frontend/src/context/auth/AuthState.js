@@ -41,11 +41,13 @@ const AuthState = (props) => {
         payload: res.data,
       });
     } catch (error) {
-      const message =
-        error.response && error.response.data.msg
-          ? error.response.data.msg
-          : error.response.statusText;
-      dispatch({ type: AUTH_ERROR, payload: message });
+      if (error.response.status !== 403) {
+        const message =
+          error.response && error.response.data.msg
+            ? error.response.data.msg
+            : error.response.statusText;
+        dispatch({ type: AUTH_ERROR, payload: message });
+      }
     }
   };
 
