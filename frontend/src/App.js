@@ -11,6 +11,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/about" component={About} />
+                    <PrivateRoute path="/profile" component={Profile} />
                     <PrivateRoute exact path="/" component={HomeScreen} />
                   </Switch>
                 </Container>

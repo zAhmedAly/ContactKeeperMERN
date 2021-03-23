@@ -66,7 +66,7 @@ const Contacts = () => {
       >
         {" "}
         <strong>Your Contacts</strong>
-        {!contactsLoading && contacts !== null && (
+        {!contactsLoading && contacts !== null && contacts.length > 0 && (
           <Badge
             style={{
               float: "right",
@@ -89,7 +89,7 @@ const Contacts = () => {
         )}
       </h3>
 
-      {contacts !== null && <SearchContacts />}
+      {contacts !== null && contacts.length > 0 && <SearchContacts />}
 
       {!contactsLoading && <Alerts />}
 
@@ -113,8 +113,16 @@ const Contacts = () => {
               marginTop: "10%",
             }}
           >
-            {" "}
-            <span> No Contacts Loaded ... </span>
+            <p
+              className="text-center"
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                width: "100%",
+              }}
+            >
+              <span>No Contacts</span>
+            </p>
           </div>
         ))}
     </>
