@@ -23,11 +23,17 @@ import {
 const ContactReducer = (state, action) => {
   switch (action.type) {
     case GET_CONTACTS_REQUEST:
-      return { ...state, contactsLoading: true };
+      return {
+        ...state,
+        contactsLoading: true,
+        contacts: null,
+        filtered: null,
+      };
     case GET_CONTACTS_SUCCESS:
       return {
         ...state,
         contacts: action.payload.sort((a, b) => (a.name > b.name ? 1 : -1)),
+        filtered: null,
         contactsLoading: false,
       };
     case GET_CONTACTS_FAIL:

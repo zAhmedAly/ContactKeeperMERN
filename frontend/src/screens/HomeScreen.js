@@ -5,17 +5,19 @@ import Contacts from "../components/Contacts";
 import AuthContext from "../context/auth/AuthContext";
 import ContactContext from "../context/contact/ContactContext";
 
-const HomeScreen = () => {
+const HomeScreen = ({ history }) => {
   const contactContext = useContext(ContactContext);
   const { contactsLoading, addLoading, deleteLoading } = contactContext;
 
   const authContext = useContext(AuthContext);
-  const { loadUser } = authContext;
+  const { loadUser, user } = authContext;
 
   useEffect(() => {
-    loadUser();
+    if (user === null) {
+      loadUser();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [user]);
   return (
     <>
       {(contactsLoading || addLoading || deleteLoading) && (
