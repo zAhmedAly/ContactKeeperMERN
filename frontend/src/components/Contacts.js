@@ -103,25 +103,17 @@ const Contacts = () => {
             ))
           )
         ) : (
-          <div
+          <p
+            className="text-center"
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignitems: "center",
-              marginTop: "10%",
+              backgroundColor: "black",
+              color: "white",
+              width: "100%",
+              margin: "auto",
             }}
           >
-            <p
-              className="text-center"
-              style={{
-                backgroundColor: "black",
-                color: "white",
-                width: "100%",
-              }}
-            >
-              <span>No Contacts</span>
-            </p>
-          </div>
+            <h3>No Contacts</h3>
+          </p>
         ))}
     </>
   );
