@@ -88,9 +88,7 @@ const Contacts = () => {
           </Badge>
         )}
       </h3>
-
-      {contacts !== null && contacts.length > 0 && <SearchContacts />}
-
+      <SearchContacts />
       {!contactsLoading && <Alerts />}
 
       {!contactsLoading &&

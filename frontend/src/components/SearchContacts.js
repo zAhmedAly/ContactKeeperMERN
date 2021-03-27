@@ -7,7 +7,7 @@ const SearchContacts = () => {
 
   const keyword = useRef("");
 
-  const { filtered, filterContacts, clearFilter } = contactContext;
+  const { filtered, filterContacts, clearFilter, contacts } = contactContext;
 
   useEffect(() => {
     if (filtered === null) {
@@ -32,6 +32,7 @@ const SearchContacts = () => {
           placeholder="Search Contacts"
           className="mr-sm-2"
           onChange={onChange}
+          disabled={contacts && contacts.length !== 0 ? false : true}
         />
       </Form>
     </>
