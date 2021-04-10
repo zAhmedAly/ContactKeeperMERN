@@ -8,6 +8,9 @@ import {
   REGISTER_FAIL,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
+  RESET_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   USER_LOADED,
 } from "../types";
 
@@ -24,6 +27,7 @@ const AuthReducer = (state, action) => {
 
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
+    case RESET_PASSWORD_REQUEST:
       return { ...state, loading: true };
 
     case LOGIN_SUCCESS:
@@ -37,10 +41,19 @@ const AuthReducer = (state, action) => {
         token: action.payload.token,
       };
 
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetEmail: action.payload,
+        message: "Email sent, please check your inbox to reset",
+        loading: false,
+      };
+
     case LOGIN_FAIL:
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
+    case RESET_PASSWORD_FAIL:
       localStorage.removeItem("token");
       return {
         ...state,

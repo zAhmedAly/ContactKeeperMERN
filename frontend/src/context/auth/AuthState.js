@@ -15,6 +15,9 @@ import {
   REGISTER_FAIL,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
+  RESET_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   USER_LOADED,
 } from "../types";
 
@@ -25,6 +28,8 @@ const AuthState = (props) => {
     loading: false,
     user: null,
     error: null,
+    message: null,
+    resetEmail: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -48,6 +53,31 @@ const AuthState = (props) => {
             : error.response.statusText;
         dispatch({ type: AUTH_ERROR, payload: message });
       }
+    }
+  };
+
+  const resetPassword = async (email) => {
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/auth/resetpassword", email, config);
+
+      setTimeout(() => {
+        dispatch({
+          type: RESET_PASSWORD_SUCCESS,
+          payload: res.data,
+        });
+      }, 5000);
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.response.statusText;
+      dispatch({ type: RESET_PASSWORD_FAIL, payload: message });
     }
   };
 
@@ -126,6 +156,7 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
+        resetPassword,
       }}
     >
       {props.children}

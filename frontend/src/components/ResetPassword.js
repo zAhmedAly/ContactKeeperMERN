@@ -1,12 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import Alerts from "../components/Alerts";
+import Alerts from "./Alerts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 
-const LoginScreen = ({ history, location }) => {
+const ResetPassword = ({ history, location }) => {
   const authContext = useContext(AuthContext);
-  const { loading, login, isAuthenticated, error, clearErrors } = authContext;
+  const {
+    loading,
+    resetPassword,
+    isAuthenticated,
+    error,
+    clearErrors,
+  } = authContext;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -27,27 +33,20 @@ const LoginScreen = ({ history, location }) => {
     // eslint-disable-next-line
   }, [isAuthenticated, history, error]);
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const { email, password } = loginData;
+  const [email, setEmail] = useState("");
 
   const onChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+    setEmail(e.target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (email === "" || password === "") {
-      setAlert("Please fill in all fields", "danger");
+    if (email === "") {
+      setAlert("Please provide email address", "danger");
     } else {
-      login({
-        email,
-        password,
-      });
+      console.log("resetPassword email = ", email);
+      resetPassword({ email });
     }
     clearErrors();
   };
@@ -64,7 +63,7 @@ const LoginScreen = ({ history, location }) => {
               className="my-2"
               style={{ color: "darkblue", textAlign: "center" }}
             >
-              <strong>User Login</strong>
+              <strong>Reset Your Password</strong>
             </h2>
             <Alerts />
             <Card className="mb-3">
@@ -83,30 +82,8 @@ const LoginScreen = ({ history, location }) => {
                       We'll never share your email with anyone else.
                     </Form.Text>
                   </Form.Group>
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password *</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      value={password}
-                      placeholder="Enter Password ..."
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                  <p
-                    style={{
-                      float: "right",
-                    }}
-                  >
-                    <a href="/reset-password">Forgot Password ? </a>
-                  </p>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block"
-                    // disabled={!email || !password}
-                  >
-                    {loading ? "LoggingIn ..." : "User Login"}
+                  <Button variant="primary" type="submit" className="btn-block">
+                    {loading ? "Sending ..." : "Reset Password"}
                   </Button>
                 </Form>
               </Card.Body>
@@ -119,4 +96,4 @@ const LoginScreen = ({ history, location }) => {
   );
 };
 
-export default LoginScreen;
+export default ResetPassword;
