@@ -103,7 +103,7 @@ const Contacts = () => {
             ))
           )
         ) : (
-          <p
+          <h4
             className="text-center"
             style={{
               backgroundColor: "black",
@@ -112,8 +112,8 @@ const Contacts = () => {
               margin: "auto",
             }}
           >
-            <h3>No Contacts</h3>
-          </p>
+            No Contacts
+          </h4>
         ))}
     </>
   );

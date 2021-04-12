@@ -1,6 +1,7 @@
 import {
   AUTH_ERROR,
   CLEAR_ERRORS,
+  CLEAR_MESSAGES,
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -44,8 +45,7 @@ const AuthReducer = (state, action) => {
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        resetEmail: action.payload,
-        message: "Email sent, please check your inbox to reset",
+        message: action.payload,
         loading: false,
       };
 
@@ -76,6 +76,11 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case CLEAR_MESSAGES:
+      return {
+        ...state,
+        message: null,
       };
 
     default:

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../middleware/auth");
 const { v4 } = require("uuid");
+const { sendEmail } = require("../middleware/sendEmail");
 
 const { check, validationResult } = require("express-validator");
 
@@ -79,7 +80,7 @@ router.post(
 );
 
 // @route     POST api/auth/resetpassword
-// @desc      Auth user & get token
+// @desc      Requesr password reset and send reset link email
 // @access    Public
 router.post(
   "/resetpassword",
@@ -113,18 +114,45 @@ router.post(
         }
       );
 
-      if (!updateResponse) {
+      if (updateResponse.n !== 1) {
         return res
           .status(400)
           .json({ msg: "Failed to generate reset link, please try again" });
       }
 
-      res.json({ resetToken });
+      /* Send email to user containing password reset link. */
+      const resetLink = `${config.get(
+        "DOMAIN"
+      )}/api/auth/reset-confirm/${resetToken}`;
+      sendEmail({
+        to: user.email,
+        subject: "Password Reset",
+        html: `<h2>Hi ${user.name}, here's your password reset link: ${resetLink}. 
+      If you did not request this link, ignore it.</h2>`,
+        text: `Hi ${user.name}, here's your password reset link: ${resetLink}. 
+      If you did not request this link, ignore it.`,
+      });
+      console.log(resetLink);
+
+      res.json({ msg: "Password reset email sent, please check your email" });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error ...");
     }
   }
 );
+
+// @route     GET api/auth/reset-confirm
+// @desc      Update Password and send confirmation email
+// @access    Public
+router.get("/reset-confirm/:token", async (req, res) => {
+  const resetToken = req.params.token;
+  const passwordReset = await PasswordReset.findOne({ token: resetToken });
+  console.log("passwordReset = ", passwordReset);
+  res.json({
+    token: resetToken,
+    valid: passwordReset ? true : false,
+  });
+});
 
 module.exports = router;

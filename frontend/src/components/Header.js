@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 
-const Header = () => {
+const Header = ({ history }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logout, user, loadUser } = authContext;
 

@@ -12,6 +12,8 @@ const ResetPassword = ({ history, location }) => {
     isAuthenticated,
     error,
     clearErrors,
+    message,
+    clearMessages,
   } = authContext;
 
   const alertContext = useContext(AlertContext);
@@ -21,7 +23,6 @@ const ResetPassword = ({ history, location }) => {
     if (isAuthenticated && !loading) {
       history.push("/");
     }
-
     if (error) {
       let errMsg = error;
       if (error === "Internal Server Error") {
@@ -29,9 +30,12 @@ const ResetPassword = ({ history, location }) => {
       }
       setAlert(errMsg, "danger");
       clearErrors();
+    } else if (message) {
+      setAlert(message, "success", 10000);
+      clearMessages();
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history, error]);
+  }, [isAuthenticated, history, error, message]);
 
   const [email, setEmail] = useState("");
 
@@ -51,47 +55,55 @@ const ResetPassword = ({ history, location }) => {
     clearErrors();
   };
 
+  const Cancel = () => {
+    history.push("/login");
+  };
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <div id="cover-spin"></div>
-      ) : (
-        <Row>
-          <Col></Col>
-          <Col md={6}>
-            <h2
-              className="my-2"
-              style={{ color: "darkblue", textAlign: "center" }}
-            >
-              <strong>Reset Your Password</strong>
-            </h2>
-            <Alerts />
-            <Card className="mb-3">
-              <Card.Body>
-                <Form onSubmit={onSubmit}>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address *</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={email}
-                      placeholder="user@example.com"
-                      onChange={onChange}
-                    />
-                    <Form.Text className="text-muted">
-                      We'll never share your email with anyone else.
-                    </Form.Text>
-                  </Form.Group>
-                  <Button variant="primary" type="submit" className="btn-block">
-                    {loading ? "Sending ..." : "Reset Password"}
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col></Col>
-        </Row>
-      )}
+      ) : ( */}
+      {loading && <div id="cover-spin"></div>}
+
+      <Row>
+        <Col></Col>
+        <Col md={6}>
+          <h2
+            className="my-2"
+            style={{ color: "darkblue", textAlign: "center" }}
+          >
+            <strong>Reset Your Password</strong>
+          </h2>
+          <Alerts />
+          <Card className="mb-3">
+            <Card.Body>
+              <Form onSubmit={onSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address *</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={email}
+                    placeholder="user@example.com"
+                    onChange={onChange}
+                  />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+                <Button variant="primary" type="submit" className="btn-block">
+                  {loading ? "Sending ..." : "Reset Password"}
+                </Button>
+                <Button variant="light" onClick={Cancel} className="btn-block">
+                  Cancel
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row>
+      {/* )} */}
     </>
   );
 };

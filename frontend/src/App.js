@@ -13,6 +13,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
+import ResetConfirm from "./components/ResetConfirm";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/about" component={About} />
                     <Route path="/reset-password" component={ResetPassword} />
+                    <Route path="/reset-confirm" component={ResetConfirm} />
                     <PrivateRoute path="/profile" component={Profile} />
                     <PrivateRoute exact path="/" component={HomeScreen} />
                   </Switch>

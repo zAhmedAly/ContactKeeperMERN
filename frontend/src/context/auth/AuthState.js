@@ -8,6 +8,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import {
   AUTH_ERROR,
   CLEAR_ERRORS,
+  CLEAR_MESSAGES,
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -29,7 +30,6 @@ const AuthState = (props) => {
     user: null,
     error: null,
     message: null,
-    resetEmail: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -65,13 +65,13 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post("/api/auth/resetpassword", email, config);
-
+      console.log("<<< RESET PASSWORD >>> ", res.data.msg);
       setTimeout(() => {
         dispatch({
           type: RESET_PASSWORD_SUCCESS,
-          payload: res.data,
+          payload: res.data.msg,
         });
-      }, 5000);
+      }, 1000);
     } catch (error) {
       const message =
         error.response && error.response.data.msg
@@ -143,6 +143,9 @@ const AuthState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  // Clear Messages
+  const clearMessages = () => dispatch({ type: CLEAR_MESSAGES });
+
   return (
     <AuthContext.Provider
       value={{
@@ -151,11 +154,13 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        message: state.message,
         register,
         loadUser,
         login,
         logout,
         clearErrors,
+        clearMessages,
         resetPassword,
       }}
     >

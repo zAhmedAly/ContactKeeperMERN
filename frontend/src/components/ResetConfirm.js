@@ -4,15 +4,34 @@ import Alerts from "../components/Alerts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 
-const LoginScreen = ({ history, location }) => {
+const ResetConfirm = ({ history }) => {
+  const [resetPassword, setResetPasswordData] = useState({
+    password: "",
+    cpassword: "",
+  });
+
+  const { password, cpassword } = resetPassword;
+
   const authContext = useContext(AuthContext);
-  const { loading, login, isAuthenticated, error, clearErrors } = authContext;
+  const {
+    loading,
+    resetConfirm,
+    isAuthenticated,
+    error,
+    clearErrors,
+    message,
+    clearMessages,
+  } = authContext;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
+  const onChange = (e) => {
+    setResetPasswordData({ ...resetPassword, [e.target.name]: e.target.value });
+  };
+
   useEffect(() => {
-    if (isAuthenticated && !loading) {
+    if (isAuthenticated) {
       history.push("/");
     }
 
@@ -23,41 +42,28 @@ const LoginScreen = ({ history, location }) => {
       }
       setAlert(errMsg, "danger");
       clearErrors();
+    } else if (message) {
+      setAlert(message, "success");
+      clearMessages();
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history, error]);
-
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const { email, password } = loginData;
-
-  const onChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
+  }, [isAuthenticated, history, error, message]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (email === "" || password === "") {
-      setAlert("Please fill in all fields", "danger");
+    if (password !== cpassword) {
+      setAlert("Passwords do not match", "danger");
     } else {
-      login({
-        email,
+      resetConfirm({
         password,
       });
     }
-    clearErrors();
   };
 
   return (
     <>
       {loading && <div id="cover-spin"></div>}
-      {/* {loading ? (
-        <div id="cover-spin"></div>
-      ) : ( */}
       <Row>
         <Col></Col>
         <Col md={6}>
@@ -65,49 +71,40 @@ const LoginScreen = ({ history, location }) => {
             className="my-2"
             style={{ color: "darkblue", textAlign: "center" }}
           >
-            <strong>User Login</strong>
+            <strong>Reset Your Password</strong>
           </h2>
           <Alerts />
           <Card className="mb-3">
             <Card.Body>
               <Form onSubmit={onSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address *</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={email}
-                    placeholder="user@example.com"
-                    onChange={onChange}
-                  />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password *</Form.Label>
                   <Form.Control
                     type="password"
                     name="password"
                     value={password}
-                    placeholder="Enter Password ..."
+                    placeholder="Enter New Password ..."
                     onChange={onChange}
                   />
                 </Form.Group>
-                <p
-                  style={{
-                    float: "right",
-                  }}
-                >
-                  <a href="/reset-password">Forgot Password ? </a>
-                </p>
+                <Form.Group controlId="formBasicCPassword">
+                  <Form.Label>Confirm Password *</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="cpassword"
+                    value={cpassword}
+                    placeholder="Confirm Password ..."
+                    onChange={onChange}
+                  />
+                </Form.Group>
+
                 <Button
                   variant="primary"
                   type="submit"
                   className="btn-block"
-                  // disabled={!email || !password}
+                  disabled={!password || !cpassword}
                 >
-                  {loading ? "LoggingIn ..." : "User Login"}
+                  {loading ? "Saving ..." : "Reset Password"}
                 </Button>
               </Form>
             </Card.Body>
@@ -115,9 +112,8 @@ const LoginScreen = ({ history, location }) => {
         </Col>
         <Col></Col>
       </Row>
-      {/* )} */}
     </>
   );
 };
 
-export default LoginScreen;
+export default ResetConfirm;
