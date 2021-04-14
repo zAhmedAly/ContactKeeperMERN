@@ -80,7 +80,7 @@ router.post(
 );
 
 // @route     POST api/auth/resetpassword
-// @desc      Requesr password reset and send reset link email
+// @desc      Request password reset and send reset link email
 // @access    Public
 router.post(
   "/resetpassword",
@@ -121,9 +121,7 @@ router.post(
       }
 
       /* Send email to user containing password reset link. */
-      const resetLink = `${config.get(
-        "DOMAIN"
-      )}/api/auth/reset-confirm/${resetToken}`;
+      const resetLink = `${config.get("DOMAIN")}/reset-confirm/${resetToken}`;
       sendEmail({
         to: user.email,
         subject: "Password Reset",
@@ -142,17 +140,67 @@ router.post(
   }
 );
 
-// @route     GET api/auth/reset-confirm
-// @desc      Update Password and send confirmation email
+// @route     GET api/auth/resetconfirm
+// @desc      Check reset password token validity
 // @access    Public
-router.get("/reset-confirm/:token", async (req, res) => {
+router.get("/resetconfirm/:token", async (req, res) => {
   const resetToken = req.params.token;
-  const passwordReset = await PasswordReset.findOne({ token: resetToken });
-  console.log("passwordReset = ", passwordReset);
-  res.json({
-    token: resetToken,
-    valid: passwordReset ? true : false,
-  });
+
+  try {
+    const passwordReset = await PasswordReset.findOne({ token: resetToken });
+    console.log("passwordReset = ", passwordReset);
+
+    if (!passwordReset) {
+      return res.status(400).json({ msg: "Link expired or not valid ..." });
+    }
+
+    res.json({
+      token: resetToken,
+      valid: passwordReset ? true : false,
+    });
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send("Server Error ...");
+  }
+});
+
+// @route     POST api/auth/resetconfirm
+// @desc      Update password and send confirmation email alert
+// @access    Public
+router.post("/resetconfirm/:token", async (req, res) => {
+  const resetToken = req.params.token;
+  const newPassword = req.params.password;
+
+  try {
+    const passwordReset = await PasswordReset.findOne({ token: resetToken });
+    console.log("RESET CONFIRM = ", passwordReset);
+
+    if (!passwordReset) {
+      return res.status(400).json({ msg: "Link expired or not valid ..." });
+    }
+
+    /* Update user */
+    let user = await User.findOne({ _id: passwordReset.user });
+    const salt = await bcrypt.genSalt(10);
+
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    await user.save();
+
+    /* Delete password reset document in collection */
+    await PasswordReset.deleteOne({ _id: passwordReset._id });
+    /* Send successful password reset email */
+    sendEmail({
+      to: user.email,
+      subject: "Password Reset Successful",
+      text: `Congratulations ${user.name}! Your password reset was successful.`,
+    });
+
+    res.json({ msg: "Successful password reset, please Login" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error ...");
+  }
 });
 
 module.exports = router;

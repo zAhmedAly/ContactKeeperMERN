@@ -30,7 +30,10 @@ const App = () => {
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/about" component={About} />
                     <Route path="/reset-password" component={ResetPassword} />
-                    <Route path="/reset-confirm" component={ResetConfirm} />
+                    <Route
+                      path="/reset-confirm/:resetToken?"
+                      component={ResetConfirm}
+                    />
                     <PrivateRoute path="/profile" component={Profile} />
                     <PrivateRoute exact path="/" component={HomeScreen} />
                   </Switch>

@@ -5,7 +5,7 @@ import Contacts from "../components/Contacts";
 import AuthContext from "../context/auth/AuthContext";
 import ContactContext from "../context/contact/ContactContext";
 
-const HomeScreen = ({ history }) => {
+const HomeScreen = () => {
   const contactContext = useContext(ContactContext);
   const { contactsLoading, addLoading, deleteLoading } = contactContext;
 

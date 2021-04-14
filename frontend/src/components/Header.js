@@ -3,10 +3,10 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 import AuthContext from "../context/auth/AuthContext";
 
 import {
-  FaUserPlus,
+  // FaUserPlus,
   FaAddressBook,
-  FaSignInAlt,
-  FaSignOutAlt,
+  // FaSignInAlt,
+  // FaSignOutAlt,
 } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 

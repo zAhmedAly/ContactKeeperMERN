@@ -9,6 +9,9 @@ import {
   REGISTER_FAIL,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
+  RESET_PASSWORD_CONFIRM_FAIL,
+  RESET_PASSWORD_CONFIRM_REQUEST,
+  RESET_PASSWORD_CONFIRM_SUCCESS,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
@@ -29,6 +32,7 @@ const AuthReducer = (state, action) => {
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
     case RESET_PASSWORD_REQUEST:
+    case RESET_PASSWORD_CONFIRM_REQUEST:
       return { ...state, loading: true };
 
     case LOGIN_SUCCESS:
@@ -43,6 +47,7 @@ const AuthReducer = (state, action) => {
       };
 
     case RESET_PASSWORD_SUCCESS:
+    case RESET_PASSWORD_CONFIRM_SUCCESS:
       return {
         ...state,
         message: action.payload,
@@ -54,6 +59,7 @@ const AuthReducer = (state, action) => {
     case AUTH_ERROR:
     case LOGOUT:
     case RESET_PASSWORD_FAIL:
+    case RESET_PASSWORD_CONFIRM_FAIL:
       localStorage.removeItem("token");
       return {
         ...state,
