@@ -51,7 +51,7 @@ const ResetConfirm = ({ history, match }) => {
       setAlert(errMsg, "danger");
       clearErrors();
     } else if (message) {
-      setAlert(message, "success");
+      setAlert(message, "success", 10000);
       clearMessages();
     }
     // eslint-disable-next-line
@@ -65,6 +65,10 @@ const ResetConfirm = ({ history, match }) => {
     } else {
       resetPasswordConfirm(resetToken, password);
     }
+    setResetPasswordData({
+      password: "",
+      cpassword: "",
+    });
   };
 
   return (
@@ -104,7 +108,6 @@ const ResetConfirm = ({ history, match }) => {
                       onChange={onChange}
                     />
                   </Form.Group>
-
                   <Button
                     variant="primary"
                     type="submit"

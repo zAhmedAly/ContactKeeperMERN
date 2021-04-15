@@ -123,10 +123,14 @@ router.post(
       /* Send email to user containing password reset link. */
       const resetLink = `${config.get("DOMAIN")}/reset-confirm/${resetToken}`;
       sendEmail({
-        to: user.email,
-        subject: "Password Reset",
-        html: `<h2>Hi ${user.name}, here's your password reset link: ${resetLink}. 
-      If you did not request this link, ignore it.</h2>`,
+        // to: user.email,
+        to: `"${user.name} ${user.email}`,
+        subject: "Password Reset Request",
+        message: `<h2>
+        Hi ${user.name}, here's your password reset link: 
+        <a href='${resetLink}'> Password Reset</a>
+        </h2>
+        <p>If you did not request this link, ignore it.</p>`,
         text: `Hi ${user.name}, here's your password reset link: ${resetLink}. 
       If you did not request this link, ignore it.`,
       });
@@ -169,11 +173,11 @@ router.get("/resetconfirm/:token", async (req, res) => {
 // @access    Public
 router.post("/resetconfirm/:token", async (req, res) => {
   const resetToken = req.params.token;
-  const newPassword = req.params.password;
+  const newPassword = req.body.password;
 
   try {
     const passwordReset = await PasswordReset.findOne({ token: resetToken });
-    console.log("RESET CONFIRM = ", passwordReset);
+    console.log("RESET CONFIRM (passwordReset) = ", passwordReset);
 
     if (!passwordReset) {
       return res.status(400).json({ msg: "Link expired or not valid ..." });
@@ -181,9 +185,13 @@ router.post("/resetconfirm/:token", async (req, res) => {
 
     /* Update user */
     let user = await User.findOne({ _id: passwordReset.user });
+
+    console.log("RESET CONFIRM (user before) = ", user);
     const salt = await bcrypt.genSalt(10);
 
     user.password = await bcrypt.hash(newPassword, salt);
+
+    console.log("RESET CONFIRM (user after) = ", user);
 
     await user.save();
 
@@ -191,8 +199,9 @@ router.post("/resetconfirm/:token", async (req, res) => {
     await PasswordReset.deleteOne({ _id: passwordReset._id });
     /* Send successful password reset email */
     sendEmail({
-      to: user.email,
+      to: `"${user.name} <${user.email}>`,
       subject: "Password Reset Successful",
+      message: `<h2>Congratulations ${user.name}! Your password reset was successful </h2>`,
       text: `Congratulations ${user.name}! Your password reset was successful.`,
     });
 
