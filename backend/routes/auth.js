@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../middleware/auth");
 const { v4 } = require("uuid");
-const { sendEmail } = require("../middleware/sendEmail");
+const { sendEmail } = require("../middleware/sendGMail");
 
 const { check, validationResult } = require("express-validator");
 
@@ -177,7 +177,7 @@ router.post("/resetconfirm/:token", async (req, res) => {
 
   try {
     const passwordReset = await PasswordReset.findOne({ token: resetToken });
-    console.log("RESET CONFIRM (passwordReset) = ", passwordReset);
+    // console.log("RESET CONFIRM (passwordReset) = ", passwordReset);
 
     if (!passwordReset) {
       return res.status(400).json({ msg: "Link expired or not valid ..." });
@@ -186,7 +186,8 @@ router.post("/resetconfirm/:token", async (req, res) => {
     /* Update user */
     let user = await User.findOne({ _id: passwordReset.user });
 
-    console.log("RESET CONFIRM (user before) = ", user);
+    // console.log("RESET CONFIRM (user before) = ", user);
+
     const salt = await bcrypt.genSalt(10);
 
     user.password = await bcrypt.hash(newPassword, salt);
