@@ -17,7 +17,7 @@ const schema = new Schema(
   }
 );
 
-schema.index({ updatedAt: 1 }, { expireAfterSeconds: 300 });
+schema.index({ updatedAt: 1 }, { expireAfterSeconds: 600 });
 
 const PasswordReset = model("PasswordReset", schema);
 

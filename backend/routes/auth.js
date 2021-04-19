@@ -126,17 +126,26 @@ router.post(
         // to: user.email,
         to: `"${user.name} ${user.email}`,
         subject: "Password Reset Request",
-        message: `<h2>
+        message: `
+        <p> Please Do not Reply to this email ...</p>
+        <hr>
+        <h2>
         Hi ${user.name}, here's your password reset link: 
-        <a href='${resetLink}'> Password Reset</a>
+        <a href='${resetLink}'>Reset My Password</a>
         </h2>
-        <p>If you did not request this link, ignore it.</p>`,
+        <hr>
+        <h3> This link expries in 10 mins</h3>
+        <h3>If you did not request this link, ignore it.</h3>
+        <hr>
+        <p>Contact Keeper Admin</p>`,
         text: `Hi ${user.name}, here's your password reset link: ${resetLink}. 
       If you did not request this link, ignore it.`,
       });
       console.log(resetLink);
 
-      res.json({ msg: "Password reset email sent, please check your email" });
+      res.json({
+        msg: "Password reset link sent to your email. Link expries in 10 mins",
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error ...");

@@ -6,7 +6,15 @@ import AuthContext from "../context/auth/AuthContext";
 
 const LoginScreen = ({ history, location }) => {
   const authContext = useContext(AuthContext);
-  const { loading, login, isAuthenticated, error, clearErrors } = authContext;
+  const {
+    loading,
+    login,
+    isAuthenticated,
+    error,
+    clearErrors,
+    message,
+    clearMessages,
+  } = authContext;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -23,9 +31,12 @@ const LoginScreen = ({ history, location }) => {
       }
       setAlert(errMsg, "danger");
       clearErrors();
+    } else if (message) {
+      setAlert(message, "success");
+      clearMessages();
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history, error]);
+  }, [isAuthenticated, history, error, message]);
 
   const [loginData, setLoginData] = useState({
     email: "",

@@ -88,7 +88,9 @@ const ResetPassword = ({ history, location }) => {
                     onChange={onChange}
                   />
                   <Form.Text className="text-muted">
-                    Enter your email address to receive a reset password link
+                    <strong>
+                      Enter your email address to receive a reset password link
+                    </strong>
                   </Form.Text>
                 </Form.Group>
                 <Button variant="primary" type="submit" className="btn-block">

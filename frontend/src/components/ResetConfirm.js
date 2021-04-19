@@ -68,8 +68,11 @@ const ResetConfirm = ({ history, match }) => {
         password: "",
         cpassword: "",
       });
-      history.push("/login");
     }
+  };
+
+  const Cancel = () => {
+    history.push("/login");
   };
 
   return (
@@ -116,6 +119,13 @@ const ResetConfirm = ({ history, match }) => {
                     disabled={!password || !cpassword}
                   >
                     {loading ? "Saving ..." : "Reset Password"}
+                  </Button>
+                  <Button
+                    variant="light"
+                    onClick={Cancel}
+                    className="btn-block"
+                  >
+                    Cancel
                   </Button>
                 </Form>
               </Card.Body>
