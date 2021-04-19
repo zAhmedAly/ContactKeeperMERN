@@ -64,11 +64,12 @@ const ResetConfirm = ({ history, match }) => {
       setAlert("Passwords do not match", "danger");
     } else {
       resetPasswordConfirm(resetToken, password);
+      setResetPasswordData({
+        password: "",
+        cpassword: "",
+      });
+      history.push("/login");
     }
-    setResetPasswordData({
-      password: "",
-      cpassword: "",
-    });
   };
 
   return (

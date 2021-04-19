@@ -72,7 +72,7 @@ const ResetPassword = ({ history, location }) => {
             className="my-2"
             style={{ color: "darkblue", textAlign: "center" }}
           >
-            <strong>Reset Your Password</strong>
+            <strong>Forgot My Password</strong>
           </h2>
           <Alerts />
           <Card className="mb-3">
@@ -88,11 +88,11 @@ const ResetPassword = ({ history, location }) => {
                     onChange={onChange}
                   />
                   <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                    Enter your email address to receive a reset password link
                   </Form.Text>
                 </Form.Group>
                 <Button variant="primary" type="submit" className="btn-block">
-                  {loading ? "Sending ..." : "Reset Password"}
+                  {loading ? "Sending ..." : "Request Password Reset"}
                 </Button>
                 <Button variant="light" onClick={Cancel} className="btn-block">
                   Cancel
