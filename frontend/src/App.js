@@ -14,7 +14,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
-import ResetConfirm from "./components/ResetConfirm";
+import ResetPasswordCheck from "./components/ResetPasswordCheck";
 import ErrorFallback from "./components/ErrorFallback";
 
 const App = () => {
@@ -35,7 +35,7 @@ const App = () => {
                       <Route path="/reset-password" component={ResetPassword} />
                       <Route
                         path="/reset-confirm/:resetToken?"
-                        component={ResetConfirm}
+                        component={ResetPasswordCheck}
                       />
                       <PrivateRoute path="/profile" component={Profile} />
                       <PrivateRoute exact path="/" component={HomeScreen} />

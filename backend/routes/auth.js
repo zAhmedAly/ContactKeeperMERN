@@ -161,16 +161,18 @@ router.get("/resetconfirm/:token", async (req, res) => {
 
   try {
     const passwordReset = await PasswordReset.findOne({ token: resetToken });
-    console.log("passwordReset = ", passwordReset);
+    // console.log("passwordReset = ", passwordReset);
 
     if (!passwordReset) {
       return res.status(400).json({ msg: "Link expired or not valid ..." });
     }
 
-    res.json({
-      token: resetToken,
-      valid: passwordReset ? true : false,
-    });
+    res.json({ msg: "Reset Password Link Validated" });
+
+    // res.json({
+    //   token: resetToken,
+    //   valid: passwordReset ? true : false,
+    // });
   } catch (error) {
     console.error(err.message);
     res.status(500).send("Server Error ...");
@@ -201,7 +203,7 @@ router.post("/resetconfirm/:token", async (req, res) => {
 
     user.password = await bcrypt.hash(newPassword, salt);
 
-    console.log("RESET CONFIRM (user after) = ", user);
+    // console.log("RESET CONFIRM (user after) = ", user);
 
     await user.save();
 

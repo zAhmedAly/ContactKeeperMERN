@@ -11,7 +11,7 @@ module.exports = {
     const CLEINT_SECRET = "vRoEG04Pm2gTh9oKs0nnK5-8";
     const REDIRECT_URI = "https://developers.google.com/oauthplayground";
     const REFRESH_TOKEN =
-      "1//04Pe1r3bC4-jKCgYIARAAGAQSNwF-L9IrOmGenxMjXZ3fVm756_sNWlCStOrOta41c4jzVD6PlmDvzMnSYhoIsUaI47-BCqkI--U";
+      "1//04KugnoOs7w8ZCgYIARAAGAQSNwF-L9Irf3mlMtMJcEdOUVxHAI58klvX_qy5NBQ2mlHZika9zunB3JoP3UYqn2txl40_RYZutt8";
     const oAuth2Client = new google.auth.OAuth2(
       CLIENT_ID,
       CLEINT_SECRET,

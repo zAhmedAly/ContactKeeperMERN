@@ -16,6 +16,8 @@ import {
   REGISTER_FAIL,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
+  RESET_PASSWORD_CHECK_FAIL,
+  RESET_PASSWORD_CHECK_SUCCESS,
   RESET_PASSWORD_CONFIRM_FAIL,
   RESET_PASSWORD_CONFIRM_REQUEST,
   RESET_PASSWORD_CONFIRM_SUCCESS,
@@ -81,6 +83,35 @@ const AuthState = (props) => {
           ? error.response.data.msg
           : error.response.statusText;
       dispatch({ type: RESET_PASSWORD_FAIL, payload: message });
+    }
+  };
+
+  const resetPasswordCheck = async (resetToken) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        `/api/auth/resetconfirm/${resetToken}`,
+        config
+      );
+      console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
+      setTimeout(() => {
+        dispatch({
+          type: RESET_PASSWORD_CHECK_SUCCESS,
+          // payload: res.data.msg,
+        });
+      }, 1000);
+    } catch (error) {
+      console.log("<<< RESET PASSWORD ERROR = ", error.response);
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.response.statusText;
+      dispatch({ type: RESET_PASSWORD_CHECK_FAIL, payload: message });
     }
   };
 
@@ -196,6 +227,7 @@ const AuthState = (props) => {
         clearErrors,
         clearMessages,
         resetPassword,
+        resetPasswordCheck,
         resetPasswordConfirm,
       }}
     >

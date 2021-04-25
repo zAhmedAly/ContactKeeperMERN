@@ -4,10 +4,10 @@ import Alerts from "../components/Alerts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 
-const ResetConfirm = ({ history, match }) => {
-  console.log("ResetConfirm resetToken = ", match.params);
+const ResetConfirm = ({ history, match, resetToken }) => {
+  // console.log("ResetConfirm resetToken = ", match.params);
 
-  const resetToken = match.params.resetToken;
+  // const resetToken = match.params.resetToken;
 
   console.log("ResetConfirm resetToken = ", resetToken);
 
@@ -42,7 +42,10 @@ const ResetConfirm = ({ history, match }) => {
     } else if (!resetToken) {
       history.push("/login");
     }
+    // eslint-disable-next-line
+  }, [isAuthenticated, history, resetToken]);
 
+  useEffect(() => {
     if (error) {
       let errMsg = error;
       if (error === "Internal Server Error") {
@@ -55,7 +58,7 @@ const ResetConfirm = ({ history, match }) => {
       clearMessages();
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history, error, message]);
+  }, [error, message]);
 
   const onSubmit = (e) => {
     e.preventDefault();
