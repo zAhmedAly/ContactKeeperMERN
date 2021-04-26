@@ -41,7 +41,7 @@ const ResetPasswordCheck = ({ history, match }) => {
         errMsg = `Not able to connect, Please try again`;
       }
       setAlert(errMsg, "danger", 10000);
-      clearErrors();
+      // clearErrors();
     }
     // eslint-disable-next-line
   }, [error]);
@@ -51,14 +51,16 @@ const ResetPasswordCheck = ({ history, match }) => {
       {/* {loading && <div id="cover-spin"></div>} */}
       {error && !loading ? (
         <>
-          <Alerts />
-          <p
-            style={{
-              float: "right",
-            }}
-          >
-            <a href="/reset-password"> Resend Reset Password Link </a>
-          </p>
+          <div style={{ margin: "auto" }}>
+            <h2> Reset Password Link expried or not valid ... </h2>
+            <p
+              style={{
+                float: "center",
+              }}
+            >
+              <a href="/reset-password"> Resend Reset Password Link </a>
+            </p>
+          </div>
         </>
       ) : (
         <ResetConfirm resetToken={resetToken} />

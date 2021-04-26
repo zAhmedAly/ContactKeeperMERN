@@ -31,7 +31,7 @@ const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: false,
-    loading: false,
+    loading: true,
     user: null,
     error: null,
     message: null,
@@ -99,18 +99,17 @@ const AuthState = (props) => {
         config
       );
       console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
-      setTimeout(() => {
-        dispatch({
-          type: RESET_PASSWORD_CHECK_SUCCESS,
-          // payload: res.data.msg,
-        });
-      }, 1000);
+      dispatch({
+        type: RESET_PASSWORD_CHECK_SUCCESS,
+        // payload: res.data.msg,
+      });
     } catch (error) {
-      console.log("<<< RESET PASSWORD ERROR = ", error.response);
       const message =
         error.response && error.response.data.msg
           ? error.response.data.msg
           : error.response.statusText;
+      console.log("<<< RESET PASSWORD MESSAGE >>> ", message);
+
       dispatch({ type: RESET_PASSWORD_CHECK_FAIL, payload: message });
     }
   };
@@ -129,7 +128,7 @@ const AuthState = (props) => {
         { password },
         config
       );
-      console.log("<<< RESET PASSWORD CONFIRM >>> ", res.data.msg);
+
       setTimeout(() => {
         dispatch({
           type: RESET_PASSWORD_CONFIRM_SUCCESS,
@@ -137,7 +136,6 @@ const AuthState = (props) => {
         });
       }, 1000);
     } catch (error) {
-      console.log("<<< RESET PASSWORD ERROR = ", error.response);
       const message =
         error.response && error.response.data.msg
           ? error.response.data.msg

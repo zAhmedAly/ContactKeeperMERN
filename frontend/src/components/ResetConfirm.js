@@ -81,6 +81,7 @@ const ResetConfirm = ({ history, match, resetToken }) => {
   return (
     <>
       {loading && <div id="cover-spin"></div>}
+
       {resetToken && (
         <Row>
           <Col></Col>
