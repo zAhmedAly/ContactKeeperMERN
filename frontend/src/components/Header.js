@@ -12,7 +12,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const Header = ({ history }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { isAuthenticated, logout, user, loadUser, loading } = authContext;
 
   useEffect(() => {
     loadUser();
@@ -46,7 +46,7 @@ const Header = ({ history }) => {
             </Navbar.Text>
           )}
           <Nav className="ml-auto">
-            {!isAuthenticated && (
+            {!isAuthenticated && !loading && (
               <>
                 <LinkContainer to="/login">
                   <Nav.Link>Login</Nav.Link>

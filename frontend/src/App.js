@@ -1,5 +1,3 @@
-import React, { useContext, useEffect } from "react";
-
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
@@ -31,6 +29,7 @@ const App = () => {
                 <main className="py-4">
                   <Container>
                     <Switch>
+                      <PrivateRoute exact path="/" component={HomeScreen} />
                       <Route path="/login" component={LoginScreen} />
                       <Route path="/register" component={RegisterScreen} />
                       <Route path="/about" component={About} />
@@ -40,7 +39,6 @@ const App = () => {
                         component={ResetPasswordCheck}
                       />
                       <PrivateRoute path="/profile" component={Profile} />
-                      <PrivateRoute exact path="/" component={HomeScreen} />
                     </Switch>
                   </Container>
                 </main>

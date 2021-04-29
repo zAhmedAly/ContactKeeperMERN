@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import Alerts from "./Alerts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 import ResetConfirm from "./ResetConfirm";
@@ -12,13 +11,7 @@ const ResetPasswordCheck = ({ history, match }) => {
   console.log("ResetPasswordCheck resetToken = ", resetToken);
 
   const authContext = useContext(AuthContext);
-  const {
-    loading,
-    resetPasswordCheck,
-    isAuthenticated,
-    error,
-    clearErrors,
-  } = authContext;
+  const { loading, resetPasswordCheck, isAuthenticated, error } = authContext;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;

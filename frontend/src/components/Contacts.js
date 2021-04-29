@@ -16,6 +16,7 @@ const Contacts = () => {
     clearContacts,
     clearFilter,
     contactsLoading,
+    deleteLoading,
     error,
     clearErrors,
     message,
@@ -55,6 +56,7 @@ const Contacts = () => {
 
   return (
     <>
+      {(contactsLoading || deleteLoading) && <div id="cover-spin"></div>}
       <h3
         style={{
           color: "darkblue",
@@ -66,55 +68,72 @@ const Contacts = () => {
       >
         {" "}
         <strong>Your Contacts</strong>
-        {!contactsLoading && contacts !== null && contacts.length > 0 && (
-          <Badge
-            style={{
-              float: "right",
-              padding: "0.3rem 0.7rem",
-              textAlign: "center",
-              alignContent: "center",
-              justifyContent: "center",
-              margin: " 0.3rem",
-              borderRadius: "5px",
-              // height: "1rem",
-              fontSize: "1rem",
-            }}
-            variant="info"
-            as="div"
-          >
-            {filtered !== null
-              ? `${filtered.length} Contacts`
-              : `${contacts.length} Contacts`}
-          </Badge>
-        )}
+        {!contactsLoading ||
+          (!deleteLoading && contacts !== null && contacts.length > 0 && (
+            <Badge
+              style={{
+                float: "right",
+                padding: "0.3rem 0.7rem",
+                textAlign: "center",
+                alignContent: "center",
+                justifyContent: "center",
+                margin: " 0.3rem",
+                borderRadius: "5px",
+                // height: "1rem",
+                fontSize: "1rem",
+              }}
+              variant="info"
+              as="div"
+            >
+              {filtered !== null
+                ? `${filtered.length} Contacts`
+                : `${contacts.length} Contacts`}
+            </Badge>
+          ))}
       </h3>
       <SearchContacts />
       {!contactsLoading && <Alerts />}
 
-      {!contactsLoading &&
-        (contacts !== null && contacts.length > 0 ? (
-          filtered !== null ? (
-            filtered.map((contact) => (
-              <ContactItem key={contact._id} contact={contact} />
-            ))
-          ) : (
-            contacts.map((contact) => (
-              <ContactItem key={contact._id} contact={contact} />
-            ))
-          )
-        ) : (
-          <h4
-            className="text-center"
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              width: "100%",
-              margin: "auto",
-            }}
-          >
-            No Contacts
-          </h4>
-        ))}
+      {contacts !== null && contacts.length === 0 && !contactsLoading && (
+        <h5
+          className="text-center"
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            width: "100%",
+            margin: "5px auto",
+            padding: "10px",
+          }}
+        >
+          No Contacts, Add a Contact
+        </h5>
+      )}
+      {
+        !contactsLoading &&
+          contacts !== null &&
+          contacts.length > 0 &&
+          (filtered !== null
+            ? filtered.map((contact) => (
+                <ContactItem key={contact._id} contact={contact} />
+              ))
+            : contacts.map((contact) => (
+                <ContactItem key={contact._id} contact={contact} />
+              )))
+        // :
+        // (
+        //   <h4
+        //     className="text-center"
+        //     style={{
+        //       backgroundColor: "black",
+        //       color: "white",
+        //       width: "100%",
+        //       margin: "auto",
+        //     }}
+        //   >
+        //     No Contacts
+        //   </h4>
+        // )
+      }
     </>
   );
 };

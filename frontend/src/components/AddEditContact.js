@@ -104,208 +104,214 @@ const AddEditContact = () => {
   };
 
   return (
-    <div className="mb-3">
-      <div className="d-lg-none d-md-block">
-        {!open && !addLoading ? (
-          <Button
-            onClick={() => setOpen(!open)}
-            aria-controls="example-collapse-text"
-            aria-expanded={open}
-            className="btn-block btn-lg"
-          >
-            <FaPlus /> Add Contact
-          </Button>
-        ) : (
-          <>
-            <h2
-              className="my-2"
-              style={{ color: "darkblue", textAlign: "center" }}
+    <>
+      {addLoading && <div id="cover-spin"></div>}
+      <div className="mb-3">
+        <div className="d-lg-none d-md-block">
+          {!open && !addLoading ? (
+            <Button
+              onClick={() => setOpen(!open)}
+              aria-controls="example-collapse-text"
+              aria-expanded={open}
+              className="btn-block btn-lg"
             >
-              {current ? (
-                <strong>Update Contact</strong>
-              ) : (
-                <strong>Add Contact</strong>
-              )}
-            </h2>
-
-            <Card className="mb-3">
-              <Card.Body>
-                <Form onSubmit={onSubmit}>
-                  <Form.Group controlId="formBasicContactName">
-                    <Form.Label>Contact Name *</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      value={name}
-                      placeholder="Enter contact name"
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address *</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={email}
-                      placeholder="user@example.com"
-                      onChange={onChange}
-                    />
-                    <Form.Text className="text-muted">
-                      We'll never share your email with anyone else.
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicPhone">
-                    <Form.Label>Phone *</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="phone"
-                      value={handleInput(phone)}
-                      placeholder="Phone number xxx-xxx-xxxx"
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="formBasicCheckbox">
-                    <Form.Label className="mr-4">Contact Type </Form.Label>
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="Personal"
-                      name="type"
-                      value="personal"
-                      checked={type === "personal"}
-                      onChange={onChange}
-                    />
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="Professional"
-                      name="type"
-                      value="professional"
-                      checked={type === "professional"}
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block"
-                    disabled={!name || !email || !phone}
-                  >
-                    {addLoading ? (
-                      <>Saving ...</>
-                    ) : current ? (
-                      "Update Contact"
-                    ) : (
-                      "Add Contact"
-                    )}
-                  </Button>
-                  <Button
-                    variant="light"
-                    className="btn-block"
-                    onClick={clearForm}
-                  >
-                    Cancel
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </>
-        )}
-      </div>
-      <div className="d-none d-lg-block">
-        <h2 className="my-2" style={{ color: "darkblue", textAlign: "center" }}>
-          {current ? (
-            <strong>Update Contact</strong>
+              <FaPlus /> Add Contact
+            </Button>
           ) : (
-            <strong>Add Contact</strong>
-          )}
-        </h2>
-
-        <Card className="mb-3">
-          <Card.Body>
-            <Form onSubmit={onSubmitWide}>
-              <Form.Group controlId="formBasicContactName">
-                <Form.Label>Contact Name *</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={name}
-                  placeholder="Enter contact name"
-                  onChange={onChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address *</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={email}
-                  placeholder="user@example.com"
-                  onChange={onChange}
-                />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
-              <Form.Group controlId="formBasicPhone">
-                <Form.Label>Phone *</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="phone"
-                  value={handleInput(phone)}
-                  placeholder="Phone number xxx-xxx-xxxx"
-                  onChange={onChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Label className="mr-4">Contact Type </Form.Label>
-                <Form.Check
-                  inline
-                  type="radio"
-                  label="Personal"
-                  name="type"
-                  value="personal"
-                  checked={type === "personal"}
-                  onChange={onChange}
-                />
-                <Form.Check
-                  inline
-                  type="radio"
-                  label="Professional"
-                  name="type"
-                  value="professional"
-                  checked={type === "professional"}
-                  onChange={onChange}
-                />
-              </Form.Group>
-
-              <Button
-                variant="primary"
-                type="submit"
-                className="btn-block"
-                disabled={!name || !email || !phone}
+            <>
+              <h2
+                className="my-2"
+                style={{ color: "darkblue", textAlign: "center" }}
               >
-                {addLoading ? (
-                  <>Saving ...</>
-                ) : current ? (
-                  "Update Contact"
+                {current ? (
+                  <strong>Update Contact</strong>
                 ) : (
-                  "Add Contact"
+                  <strong>Add Contact</strong>
                 )}
-              </Button>
-              <Button
-                variant="light"
-                className="btn-block"
-                onClick={clearFormWide}
-              >
-                Cancel
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
+              </h2>
+
+              <Card className="mb-3">
+                <Card.Body>
+                  <Form onSubmit={onSubmit}>
+                    <Form.Group controlId="formBasicContactName">
+                      <Form.Label>Contact Name *</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="name"
+                        value={name}
+                        placeholder="Enter contact name"
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                      <Form.Label>Email address *</Form.Label>
+                      <Form.Control
+                        type="email"
+                        name="email"
+                        value={email}
+                        placeholder="user@example.com"
+                        onChange={onChange}
+                      />
+                      <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                      </Form.Text>
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPhone">
+                      <Form.Label>Phone *</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="phone"
+                        value={handleInput(phone)}
+                        placeholder="Phone number xxx-xxx-xxxx"
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Label className="mr-4">Contact Type </Form.Label>
+                      <Form.Check
+                        inline
+                        type="radio"
+                        label="Personal"
+                        name="type"
+                        value="personal"
+                        checked={type === "personal"}
+                        onChange={onChange}
+                      />
+                      <Form.Check
+                        inline
+                        type="radio"
+                        label="Professional"
+                        name="type"
+                        value="professional"
+                        checked={type === "professional"}
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="btn-block"
+                      disabled={!name || !email || !phone}
+                    >
+                      {addLoading ? (
+                        <>Saving ...</>
+                      ) : current ? (
+                        "Update Contact"
+                      ) : (
+                        "Add Contact"
+                      )}
+                    </Button>
+                    <Button
+                      variant="light"
+                      className="btn-block"
+                      onClick={clearForm}
+                    >
+                      Cancel
+                    </Button>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </>
+          )}
+        </div>
+        <div className="d-none d-lg-block">
+          <h2
+            className="my-2"
+            style={{ color: "darkblue", textAlign: "center" }}
+          >
+            {current ? (
+              <strong>Update Contact</strong>
+            ) : (
+              <strong>Add Contact</strong>
+            )}
+          </h2>
+
+          <Card className="mb-3">
+            <Card.Body>
+              <Form onSubmit={onSubmitWide}>
+                <Form.Group controlId="formBasicContactName">
+                  <Form.Label>Contact Name *</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={name}
+                    placeholder="Enter contact name"
+                    onChange={onChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address *</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={email}
+                    placeholder="user@example.com"
+                    onChange={onChange}
+                  />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formBasicPhone">
+                  <Form.Label>Phone *</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="phone"
+                    value={handleInput(phone)}
+                    placeholder="Phone number xxx-xxx-xxxx"
+                    onChange={onChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Label className="mr-4">Contact Type </Form.Label>
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="Personal"
+                    name="type"
+                    value="personal"
+                    checked={type === "personal"}
+                    onChange={onChange}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="Professional"
+                    name="type"
+                    value="professional"
+                    checked={type === "professional"}
+                    onChange={onChange}
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="btn-block"
+                  disabled={!name || !email || !phone}
+                >
+                  {addLoading ? (
+                    <>Saving ...</>
+                  ) : current ? (
+                    "Update Contact"
+                  ) : (
+                    "Add Contact"
+                  )}
+                </Button>
+                <Button
+                  variant="light"
+                  className="btn-block"
+                  onClick={clearFormWide}
+                >
+                  Cancel
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

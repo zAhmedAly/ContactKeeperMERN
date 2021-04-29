@@ -35,7 +35,7 @@ const AuthReducer = (state, action) => {
     case REGISTER_REQUEST:
     case RESET_PASSWORD_REQUEST:
     case RESET_PASSWORD_CONFIRM_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, loginLoading: true };
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
