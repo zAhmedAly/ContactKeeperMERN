@@ -39,7 +39,7 @@ const Header = ({ history }) => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {user && (
+          {isAuthenticated && user && (
             <Navbar.Text>
               {" "}
               <strong> Logged in as {user.name}</strong>

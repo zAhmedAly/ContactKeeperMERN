@@ -1,25 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import AuthContext from "../../context/auth/AuthContext";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading, loadUser, user } = authContext;
+  const { isAuthenticated, loading } = authContext;
   console.log("<<< isAuthenticated >>> = ", isAuthenticated);
   console.log("<<< loading >>> = ", loading);
-  console.log("<<< USER >>> = ", user);
 
   console.log(
     "<<< !isAuthenticated && !loading >>> = ",
     !isAuthenticated && !loading
   );
-
-  useEffect(() => {
-    if (user === null) {
-      loadUser();
-    }
-    // eslint-disable-next-line
-  }, [user]);
 
   return (
     <Route

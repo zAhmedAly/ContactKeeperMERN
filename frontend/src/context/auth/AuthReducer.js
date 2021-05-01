@@ -23,6 +23,8 @@ import {
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case USER_LOADED:
+      localStorage.setItem("isAuthenticated", state.isAuthenticated);
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
       return {
         ...state,
         isAuthenticated: true,
@@ -35,7 +37,7 @@ const AuthReducer = (state, action) => {
     case REGISTER_REQUEST:
     case RESET_PASSWORD_REQUEST:
     case RESET_PASSWORD_CONFIRM_REQUEST:
-      return { ...state, loading: true, loginLoading: true };
+      return { ...state, loading: true };
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
@@ -43,8 +45,8 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         ...action.payload,
-        loading: false,
         isAuthenticated: true,
+        loading: false,
         token: action.payload.token,
       };
 
@@ -73,6 +75,8 @@ const AuthReducer = (state, action) => {
     case RESET_PASSWORD_CHECK_FAIL:
     case RESET_PASSWORD_CONFIRM_FAIL:
       localStorage.removeItem("token");
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("userInfo");
       return {
         ...state,
         token: null,
