@@ -49,7 +49,7 @@ const ResetPassword = ({ history, location }) => {
     if (email === "") {
       setAlert("Please provide email address", "danger");
     } else {
-      console.log("resetPassword email = ", email);
+      // console.log("resetPassword email = ", email);
       resetPassword({ email });
     }
     clearErrors();

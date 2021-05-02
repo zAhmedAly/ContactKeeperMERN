@@ -83,7 +83,7 @@ const ContactState = (props) => {
 
     try {
       const res = await axios.post("/api/contacts", contact, config);
-      console.log("res.data = ", res.data);
+      //  console.log("res.data = ", res.data);
       setTimeout(() => {
         dispatch({
           type: ADD_CONTACT_SUCCESS,

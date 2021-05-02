@@ -70,7 +70,7 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post("/api/auth/resetpassword", email, config);
-      console.log("<<< RESET PASSWORD >>> ", res.data.msg);
+      // console.log("<<< RESET PASSWORD >>> ", res.data.msg);
       setTimeout(() => {
         dispatch({
           type: RESET_PASSWORD_SUCCESS,
@@ -98,7 +98,7 @@ const AuthState = (props) => {
         `/api/auth/resetconfirm/${resetToken}`,
         config
       );
-      console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
+    //  console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
       dispatch({
         type: RESET_PASSWORD_CHECK_SUCCESS,
         // payload: res.data.msg,
@@ -108,7 +108,7 @@ const AuthState = (props) => {
         error.response && error.response.data.msg
           ? error.response.data.msg
           : error.response.statusText;
-      console.log("<<< RESET PASSWORD MESSAGE >>> ", message);
+      // console.log("<<< RESET PASSWORD MESSAGE >>> ", message);
 
       dispatch({ type: RESET_PASSWORD_CHECK_FAIL, payload: message });
     }

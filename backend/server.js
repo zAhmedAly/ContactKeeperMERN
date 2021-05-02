@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 
   app.get("/*", (req, res) => {
     res.sendFile(path.resolve("frontend", "build", "index.html"));
-    console.log(`MAIN LINK ... ${__dirname}/frontend/build/index.html`);
+    //  console.log(`MAIN LINK ... ${__dirname}/frontend/build/index.html`);
   });
 } else {
   app.get("/", (req, res) => {

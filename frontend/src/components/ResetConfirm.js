@@ -9,7 +9,7 @@ const ResetConfirm = ({ history, match, resetToken }) => {
 
   // const resetToken = match.params.resetToken;
 
-  console.log("ResetConfirm resetToken = ", resetToken);
+  // console.log("ResetConfirm resetToken = ", resetToken);
 
   const [resetPassword, setResetPasswordData] = useState({
     password: "",

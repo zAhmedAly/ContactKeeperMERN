@@ -161,7 +161,7 @@ router.get("/resetconfirm/:token", async (req, res) => {
 
   try {
     const passwordReset = await PasswordReset.findOne({ token: resetToken });
-    console.log("passwordReset = ", passwordReset);
+    // console.log("passwordReset = ", passwordReset);
 
     if (!passwordReset) {
       return res.status(400).json({ msg: "Link expired or not valid ..." });

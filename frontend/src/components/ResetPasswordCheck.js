@@ -8,7 +8,7 @@ const ResetPasswordCheck = ({ history, match }) => {
 
   const resetToken = match.params.resetToken;
 
-  console.log("ResetPasswordCheck resetToken = ", resetToken);
+  // console.log("ResetPasswordCheck resetToken = ", resetToken);
 
   const authContext = useContext(AuthContext);
   const { loading, resetPasswordCheck, isAuthenticated, error } = authContext;
@@ -29,7 +29,7 @@ const ResetPasswordCheck = ({ history, match }) => {
   useEffect(() => {
     if (error) {
       let errMsg = error;
-      console.log("ResetPasswordCheck ERROR ", errMsg);
+      // console.log("ResetPasswordCheck ERROR ", errMsg);
       if (error === "Internal Server Error") {
         errMsg = `Not able to connect, Please try again`;
       }
