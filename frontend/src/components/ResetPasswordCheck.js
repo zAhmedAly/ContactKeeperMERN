@@ -33,8 +33,8 @@ const ResetPasswordCheck = ({ history, match }) => {
       if (error === "Internal Server Error") {
         errMsg = `Not able to connect, Please try again`;
       }
-      setAlert(errMsg, "danger", 10000);
-      // clearErrors();
+      setAlert(errMsg, "danger", 5000);
+      clearErrors();
     }
     // eslint-disable-next-line
   }, [error]);
