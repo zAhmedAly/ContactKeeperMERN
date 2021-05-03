@@ -68,8 +68,9 @@ const Contacts = () => {
       >
         {" "}
         <strong>Your Contacts</strong>
-        {!contactsLoading ||
-          (!deleteLoading && contacts !== null && contacts.length > 0 && (
+        {(!contactsLoading || !deleteLoading) &&
+          contacts !== null &&
+          contacts.length > 0 && (
             <Badge
               style={{
                 float: "right",
@@ -89,7 +90,7 @@ const Contacts = () => {
                 ? `${filtered.length} Contacts`
                 : `${contacts.length} Contacts`}
             </Badge>
-          ))}
+          )}
       </h3>
       <SearchContacts />
       {!contactsLoading && <Alerts />}

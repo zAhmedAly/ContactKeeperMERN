@@ -11,7 +11,13 @@ const ResetPasswordCheck = ({ history, match }) => {
   // console.log("ResetPasswordCheck resetToken = ", resetToken);
 
   const authContext = useContext(AuthContext);
-  const { loading, resetPasswordCheck, isAuthenticated, error } = authContext;
+  const {
+    loading,
+    resetPasswordCheck,
+    isAuthenticated,
+    error,
+    clearErrors,
+  } = authContext;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
