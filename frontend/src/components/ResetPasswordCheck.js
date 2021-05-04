@@ -4,7 +4,7 @@ import AuthContext from "../context/auth/AuthContext";
 import ResetConfirm from "./ResetConfirm";
 
 const ResetPasswordCheck = ({ history, match }) => {
-  console.log("ResetPasswordCheck resetToken = ", match.params);
+  // console.log("ResetPasswordCheck resetToken = ", match.params);
 
   const resetToken = match.params.resetToken;
 
@@ -30,7 +30,7 @@ const ResetPasswordCheck = ({ history, match }) => {
     }
     resetPasswordCheck(resetToken);
     // eslint-disable-next-line
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, history, resetToken]);
 
   useEffect(() => {
     if (error) {
@@ -40,7 +40,7 @@ const ResetPasswordCheck = ({ history, match }) => {
         errMsg = `Not able to connect, Please try again`;
       }
       setAlert(errMsg, "danger", 5000);
-      clearErrors();
+      // clearErrors();
     }
     // eslint-disable-next-line
   }, [error]);
@@ -50,13 +50,10 @@ const ResetPasswordCheck = ({ history, match }) => {
       {/* {loading && <div id="cover-spin"></div>} */}
       {error && !loading ? (
         <>
-          <div style={{ margin: "auto" }}>
-            <h2> Reset Password Link expried or not valid ... </h2>
-            <p
-              style={{
-                float: "center",
-              }}
-            >
+          <div className="text-center" style={{ marginTop: "10%" }}>
+            <h3>Reset Password Link Expried or Not Valid</h3>
+            <br />
+            <p>
               <a href="/reset-password"> Resend Reset Password Link </a>
             </p>
           </div>

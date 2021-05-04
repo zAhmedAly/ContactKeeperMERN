@@ -9,7 +9,7 @@ const SearchContacts = () => {
 
   const { filtered, filterContacts, clearFilter, contacts } = contactContext;
 
-  const [radioValue, setRadioValue] = React.useState("name");
+  const [radioValue, setRadioValue] = useState("name");
   const radios = [
     { name: "Name", value: "name" },
     { name: "Type", value: "type" },
@@ -23,8 +23,11 @@ const SearchContacts = () => {
     }
   });
 
+  console.log("<<< FILTER TYPE 1 >>> ", radioValue);
+
   const onChange = (e) => {
     if (keyword.current.value !== "") {
+      console.log("<<< FILTER TYPE 2 >>> ", radioValue);
       filterContacts(e.target.value);
     } else {
       clearFilter();
@@ -50,7 +53,6 @@ const SearchContacts = () => {
               inline
               type="radio"
               label={radio.name}
-              type="radio"
               name="radio"
               value={radio.value}
               checked={radioValue === radio.value}

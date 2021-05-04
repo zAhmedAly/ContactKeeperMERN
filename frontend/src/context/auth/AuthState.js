@@ -94,11 +94,8 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.get(
-        `/api/auth/resetconfirm/${resetToken}`,
-        config
-      );
-    //  console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
+      await axios.get(`/api/auth/resetconfirm/${resetToken}`, config);
+      //  console.log("<<< RESET PASSWORD CHECK >>> ", res.data.msg);
       dispatch({
         type: RESET_PASSWORD_CHECK_SUCCESS,
         // payload: res.data.msg,

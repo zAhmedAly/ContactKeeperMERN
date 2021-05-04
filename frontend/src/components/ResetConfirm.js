@@ -1,15 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import Alerts from "../components/Alerts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 
-const ResetConfirm = ({ history, match, resetToken }) => {
+const ResetConfirm = ({ resetToken }) => {
   // console.log("ResetConfirm resetToken = ", match.params);
 
   // const resetToken = match.params.resetToken;
 
-  // console.log("ResetConfirm resetToken = ", resetToken);
+  console.log("ResetConfirm resetToken = ", resetToken);
+
+  let history = useHistory();
 
   const [resetPassword, setResetPasswordData] = useState({
     password: "",
