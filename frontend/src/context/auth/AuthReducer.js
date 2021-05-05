@@ -42,6 +42,7 @@ const AuthReducer = (state, action) => {
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("isAuthenticated", state.isAuthenticated);
       return {
         ...state,
         ...action.payload,
@@ -57,6 +58,7 @@ const AuthReducer = (state, action) => {
         message: action.payload,
         loading: false,
         error: null,
+        passwordReset: true,
       };
 
     case RESET_PASSWORD_CHECK_SUCCESS:
@@ -65,6 +67,7 @@ const AuthReducer = (state, action) => {
         message: null,
         loading: false,
         error: null,
+        passwordReset: true,
       };
 
     case LOGIN_FAIL:
@@ -98,6 +101,7 @@ const AuthReducer = (state, action) => {
         user: null,
         error: action.payload,
         message: null,
+        passwordReset: false,
       };
 
     case CLEAR_ERRORS:

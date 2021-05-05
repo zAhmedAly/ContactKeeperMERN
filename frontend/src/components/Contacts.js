@@ -6,6 +6,7 @@ import SearchContacts from "./SearchContacts";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 import Alerts from "./Alerts";
+import { useHistory } from "react-router";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
@@ -27,13 +28,20 @@ const Contacts = () => {
   const { setAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { logout } = authContext;
+  const { isAuthenticated, token, logout } = authContext;
+
+  let history = useHistory();
 
   useEffect(() => {
-    getContacts();
+    if (isAuthenticated && token) {
+      getContacts();
+    } else {
+      logout();
+      history.push("/login");
+    }
 
     // eslint-disable-next-line
-  }, []);
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (error) {

@@ -35,6 +35,7 @@ const AuthState = (props) => {
     user: JSON.parse(localStorage.getItem("userInfo")),
     error: null,
     message: null,
+    passwordReset: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -215,6 +216,7 @@ const AuthState = (props) => {
         user: state.user,
         error: state.error,
         message: state.message,
+        passwordReset: state.passwordReset,
         register,
         loadUser,
         login,

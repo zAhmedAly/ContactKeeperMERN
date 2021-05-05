@@ -43,7 +43,7 @@ const SearchContacts = () => {
           placeholder="Search Contacts"
           className="mr-sm-2"
           onChange={onChange}
-          disabled={contacts && contacts.length !== 0 ? false : true}
+          disabled={contacts && contacts.length > 1 ? false : true}
         />
 
         <Form.Group controlId="formBasicCheckbox" className="py-2">
@@ -57,6 +57,7 @@ const SearchContacts = () => {
               value={radio.value}
               checked={radioValue === radio.value}
               onChange={(e) => setRadioValue(e.currentTarget.value)}
+              disabled={contacts && contacts.length > 1 ? false : true}
             />
           ))}
         </Form.Group>
