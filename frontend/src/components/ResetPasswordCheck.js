@@ -14,6 +14,7 @@ const ResetPasswordCheck = ({ history, match }) => {
   const {
     resetPasswordCheck,
     isAuthenticated,
+    loading,
     error,
     clearErrors,
     passwordReset,
@@ -25,7 +26,7 @@ const ResetPasswordCheck = ({ history, match }) => {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    if (isAuthenticated && passwordReset) {
+    if (isAuthenticated && !passwordReset) {
       console.log(
         "ResetPasswordCheck useEffect isAuthenticated = ",
         isAuthenticated
@@ -39,7 +40,7 @@ const ResetPasswordCheck = ({ history, match }) => {
       resetPasswordCheck(resetToken);
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history, resetToken]);
+  }, [isAuthenticated, passwordReset, history, resetToken]);
 
   useEffect(() => {
     if (error) {
@@ -55,18 +56,19 @@ const ResetPasswordCheck = ({ history, match }) => {
   }, [error]);
 
   console.log("ResetPasswordCheck isAuthenticated 2 = ", isAuthenticated);
-  console.log(
-    "ResetPasswordCheck error && !passwordReset=",
-    !passwordReset && error
-  );
-
   console.log("ResetPasswordCheck error =", error);
   console.log("ResetPasswordCheck !passwordReset =", !passwordReset);
+  console.log("ResetPasswordCheck !loading =", !loading);
+
+  console.log(
+    "ResetPasswordCheck !isAuthenticated && !passwordReset && !loading  =",
+    !isAuthenticated && !passwordReset && !loading
+  );
 
   return (
     <>
       {/* {loading && <div id="cover-spin"></div>} */}
-      {!passwordReset && error ? (
+      {!isAuthenticated && !passwordReset && error && (
         <>
           <div className="text-center" style={{ marginTop: "10%" }}>
             <h3>Reset Password Link Expried or Not Valid</h3>
@@ -76,9 +78,9 @@ const ResetPasswordCheck = ({ history, match }) => {
             </p>
           </div>
         </>
-      ) : (
-        <ResetConfirm resetToken={resetToken} />
       )}
+
+      {passwordReset && <ResetConfirm resetToken={resetToken} />}
     </>
   );
 };
