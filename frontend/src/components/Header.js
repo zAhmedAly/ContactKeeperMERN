@@ -58,10 +58,24 @@ const Header = ({ history }) => {
             )}
             {isAuthenticated && (
               <>
-                <LinkContainer to="/">
+                <LinkContainer
+                  to="/"
+                  activeClassName="selected"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "yellow",
+                  }}
+                >
                   <Nav.Link>My Contacts</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/profile">
+                <LinkContainer
+                  to="/profile"
+                  activeClassName="selected"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "yellow",
+                  }}
+                >
                   <Nav.Link>Profile</Nav.Link>
                 </LinkContainer>
 
@@ -71,7 +85,14 @@ const Header = ({ history }) => {
               </>
             )}
 
-            <LinkContainer to="/about">
+            <LinkContainer
+              to="/about"
+              activeClassName="selected"
+              activeStyle={{
+                fontWeight: "bold",
+                color: "yellow",
+              }}
+            >
               <Nav.Link>About</Nav.Link>
             </LinkContainer>
           </Nav>

@@ -9,7 +9,7 @@ const Alerts = () => {
   return (
     alerts.length > 0 &&
     alerts.map((alert) => (
-      <div className="text-center">
+      <div key={alert.id} className="text-center">
         <Alert key={alert.id} variant={alert.type}>
           {alert.msg}
         </Alert>

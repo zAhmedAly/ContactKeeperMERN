@@ -48,7 +48,10 @@ const Contacts = () => {
       let errMsg = error;
       if (error === "Internal Server Error") {
         errMsg = `Not able to connect, Please try again`;
-      } else if (error === "Session Expired, Please Login") {
+      } else if (
+        error === "Session Expired, Please Login" ||
+        "No token, authorization failed"
+      ) {
         clearContacts();
         clearFilter();
         logout();

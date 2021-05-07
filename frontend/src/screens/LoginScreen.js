@@ -18,7 +18,6 @@ const LoginScreen = ({ history }) => {
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
-
   useEffect(() => {
     if (isAuthenticated) {
       history.push("/");

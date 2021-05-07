@@ -20,23 +20,23 @@ const ResetPasswordCheck = ({ history, match }) => {
     passwordReset,
   } = authContext;
 
-  console.log("ResetPasswordCheck isAuthenticated 1 = ", isAuthenticated);
+  // console.log("ResetPasswordCheck isAuthenticated 1 = ", isAuthenticated);
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated && !passwordReset) {
-      console.log(
-        "ResetPasswordCheck useEffect isAuthenticated = ",
-        isAuthenticated
-      );
+      // console.log(
+      //   "ResetPasswordCheck useEffect isAuthenticated = ",
+      //   isAuthenticated
+      // );
       history.push("/");
     } else if (!resetToken) {
-      console.log("ResetPasswordCheck useEffect !resetToken = ", resetToken);
+      // console.log("ResetPasswordCheck useEffect !resetToken = ", resetToken);
       history.push("/login");
     } else {
-      console.log("ResetPasswordCheck useEffect resetToken = ", resetToken);
+      // console.log("ResetPasswordCheck useEffect resetToken = ", resetToken);
       resetPasswordCheck(resetToken);
     }
     // eslint-disable-next-line
@@ -55,15 +55,15 @@ const ResetPasswordCheck = ({ history, match }) => {
     // eslint-disable-next-line
   }, [error]);
 
-  console.log("ResetPasswordCheck isAuthenticated 2 = ", isAuthenticated);
-  console.log("ResetPasswordCheck error =", error);
-  console.log("ResetPasswordCheck !passwordReset =", !passwordReset);
-  console.log("ResetPasswordCheck !loading =", !loading);
+  // console.log("ResetPasswordCheck isAuthenticated 2 = ", isAuthenticated);
+  // console.log("ResetPasswordCheck error =", error);
+  // console.log("ResetPasswordCheck !passwordReset =", !passwordReset);
+  // console.log("ResetPasswordCheck !loading =", !loading);
 
-  console.log(
-    "ResetPasswordCheck !isAuthenticated && !passwordReset && !loading  =",
-    !isAuthenticated && !passwordReset && !loading
-  );
+  // console.log(
+  //   "ResetPasswordCheck !isAuthenticated && !passwordReset && !loading  =",
+  //   !isAuthenticated && !passwordReset && !loading
+  // );
 
   return (
     <>

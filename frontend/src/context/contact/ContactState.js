@@ -3,6 +3,7 @@ import axios from "axios";
 
 import ContactContext from "./ContactContext";
 import contactReducer from "./ContactReducer";
+import setAuthToken from "../../utils/setAuthToken";
 
 import {
   GET_CONTACTS_REQUEST,
@@ -41,6 +42,8 @@ const ContactState = (props) => {
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   const getContacts = async () => {
+    setAuthToken(localStorage.token);
+
     dispatch({ type: GET_CONTACTS_REQUEST });
     try {
       const res = await axios.get("/api/contacts");
