@@ -7,7 +7,15 @@ const SearchContacts = () => {
 
   const keyword = useRef("");
 
-  const { filtered, filterContacts, clearFilter, contacts } = contactContext;
+  const {
+    filtered,
+    filterContactsByName,
+    filterContactsByType,
+    filterContactsByPhone,
+    filterContactsByEmail,
+    clearFilter,
+    contacts,
+  } = contactContext;
 
   const [radioValue, setRadioValue] = useState("name");
   const radios = [
@@ -23,12 +31,21 @@ const SearchContacts = () => {
     }
   });
 
-  console.log("<<< FILTER TYPE 1 >>> ", radioValue);
+  // console.log("<<< FILTER TYPE 1 >>> ", radioValue);
 
   const onChange = (e) => {
     if (keyword.current.value !== "") {
-      console.log("<<< FILTER TYPE 2 >>> ", radioValue);
-      filterContacts(e.target.value);
+      // console.log("keyword.current.value = ", keyword.current.value);
+      // console.log("<<< FILTER TYPE 2 >>> ", radioValue);
+      if (radioValue === "name") {
+        filterContactsByName(e.target.value);
+      } else if (radioValue === "type") {
+        filterContactsByType(e.target.value);
+      } else if (radioValue === "phone") {
+        filterContactsByPhone(e.target.value);
+      } else if (radioValue === "email") {
+        filterContactsByEmail(e.target.value);
+      }
     } else {
       clearFilter();
     }

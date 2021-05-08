@@ -2,7 +2,6 @@ import {
   GET_CONTACTS_REQUEST,
   GET_CONTACTS_SUCCESS,
   GET_CONTACTS_FAIL,
-  FILTER_CONTACTS,
   CLEAR_FILTER,
   ADD_CONTACT_SUCCESS,
   ADD_CONTACT_FAIL,
@@ -18,6 +17,10 @@ import {
   CLEAR_ERRORS,
   CLEAR_CONTACTS,
   CLEAR_MESSAGES,
+  FILTER_CONTACTS_BY_NAME,
+  FILTER_CONTACTS_BY_TYPE,
+  FILTER_CONTACTS_BY_PHONE,
+  FILTER_CONTACTS_BY_EMAIL,
 } from "../types";
 
 const ContactReducer = (state, action) => {
@@ -53,11 +56,38 @@ const ContactReducer = (state, action) => {
         current: null,
         message: null,
       };
-    case FILTER_CONTACTS:
+    case FILTER_CONTACTS_BY_NAME:
       return {
         ...state,
         filtered: state.contacts.filter((contact) => {
           return contact.name
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        }),
+      };
+    case FILTER_CONTACTS_BY_TYPE:
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          return contact.type
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        }),
+      };
+    case FILTER_CONTACTS_BY_PHONE:
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          return contact.phone
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        }),
+      };
+    case FILTER_CONTACTS_BY_EMAIL:
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          return contact.email
             .toLowerCase()
             .includes(action.payload.toLowerCase());
         }),

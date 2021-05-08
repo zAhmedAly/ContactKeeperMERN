@@ -60,10 +60,8 @@ const Header = ({ history }) => {
               <>
                 <LinkContainer
                   to="/"
-                  activeClassName="selected"
                   activeStyle={{
                     fontWeight: "bold",
-                    color: "yellow",
                   }}
                 >
                   <Nav.Link>My Contacts</Nav.Link>
@@ -73,7 +71,6 @@ const Header = ({ history }) => {
                   activeClassName="selected"
                   activeStyle={{
                     fontWeight: "bold",
-                    color: "yellow",
                   }}
                 >
                   <Nav.Link>Profile</Nav.Link>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
 import AlertContext from "../context/alert/AlertContext";
 import AuthContext from "../context/auth/AuthContext";
 import ResetConfirm from "./ResetConfirm";
@@ -14,9 +15,7 @@ const ResetPasswordCheck = ({ history, match }) => {
   const {
     resetPasswordCheck,
     isAuthenticated,
-    loading,
     error,
-    clearErrors,
     passwordReset,
   } = authContext;
 
@@ -71,10 +70,29 @@ const ResetPasswordCheck = ({ history, match }) => {
       {!isAuthenticated && !passwordReset && error && (
         <>
           <div className="text-center" style={{ marginTop: "10%" }}>
-            <h3>Reset Password Link Expried or Not Valid</h3>
+            <Row>
+              <Col />
+              <Col md={6}>
+                <h4>Reset Password Link Expried or Not Valid</h4>
+              </Col>
+              <Col />
+            </Row>
             <br />
             <p>
-              <a href="/reset-password"> Resend Reset Password Link </a>
+              <Row>
+                <Col />
+                <Col md={6} style={{ marginBottom: "10px" }}>
+                  <a href="/reset-password"> Resend Reset Password Link </a>
+                </Col>
+                <Col />
+              </Row>
+              <Row>
+                <Col />
+                <Col md={6} float="right">
+                  <a href="/login"> Relogin </a>
+                </Col>
+                <Col />
+              </Row>
             </p>
           </div>
         </>

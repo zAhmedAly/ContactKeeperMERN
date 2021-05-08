@@ -9,7 +9,6 @@ import {
   GET_CONTACTS_REQUEST,
   GET_CONTACTS_SUCCESS,
   GET_CONTACTS_FAIL,
-  FILTER_CONTACTS,
   CLEAR_FILTER,
   ADD_CONTACT_REQUEST,
   ADD_CONTACT_SUCCESS,
@@ -25,6 +24,10 @@ import {
   CLEAR_ERRORS,
   CLEAR_CONTACTS,
   CLEAR_MESSAGES,
+  FILTER_CONTACTS_BY_NAME,
+  FILTER_CONTACTS_BY_TYPE,
+  FILTER_CONTACTS_BY_PHONE,
+  FILTER_CONTACTS_BY_EMAIL,
 } from "../types";
 
 const ContactState = (props) => {
@@ -67,8 +70,20 @@ const ContactState = (props) => {
     dispatch({ type: CLEAR_CONTACTS });
   };
 
-  const filterContacts = (keyword) => {
-    dispatch({ type: FILTER_CONTACTS, payload: keyword });
+  const filterContactsByName = (keyword) => {
+    dispatch({ type: FILTER_CONTACTS_BY_NAME, payload: keyword });
+  };
+
+  const filterContactsByType = (keyword) => {
+    dispatch({ type: FILTER_CONTACTS_BY_TYPE, payload: keyword });
+  };
+
+  const filterContactsByPhone = (keyword) => {
+    dispatch({ type: FILTER_CONTACTS_BY_PHONE, payload: keyword });
+  };
+
+  const filterContactsByEmail = (keyword) => {
+    dispatch({ type: FILTER_CONTACTS_BY_EMAIL, payload: keyword });
   };
 
   const clearFilter = () => {
@@ -180,7 +195,10 @@ const ContactState = (props) => {
         deleteLoading: state.deleteLoading,
         getContacts,
         clearContacts,
-        filterContacts,
+        filterContactsByName,
+        filterContactsByType,
+        filterContactsByPhone,
+        filterContactsByEmail,
         clearFilter,
         addContact,
         deleteContact,
