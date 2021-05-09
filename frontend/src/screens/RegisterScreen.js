@@ -77,7 +77,9 @@ const RegisterScreen = ({ history }) => {
             <Card.Body>
               <Form onSubmit={onSubmit}>
                 <Form.Group controlId="formBasicContactName">
-                  <Form.Label>Name *</Form.Label>
+                  <Form.Label>
+                    <strong>Name *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="name"
@@ -87,7 +89,9 @@ const RegisterScreen = ({ history }) => {
                   />
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address *</Form.Label>
+                  <Form.Label>
+                    <strong>Email Address *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="email"
@@ -100,7 +104,9 @@ const RegisterScreen = ({ history }) => {
                   </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password *</Form.Label>
+                  <Form.Label>
+                    <strong>Password *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="password"
                     name="password"
@@ -110,7 +116,9 @@ const RegisterScreen = ({ history }) => {
                   />
                 </Form.Group>
                 <Form.Group controlId="formBasicCPassword">
-                  <Form.Label>Confirm Password *</Form.Label>
+                  <Form.Label>
+                    <strong>Confirm Password *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="password"
                     name="cpassword"

@@ -80,7 +80,9 @@ const LoginScreen = ({ history }) => {
             <Card.Body>
               <Form onSubmit={onSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address *</Form.Label>
+                  <Form.Label>
+                    <strong>Email address *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="email"
@@ -93,7 +95,9 @@ const LoginScreen = ({ history }) => {
                   </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password *</Form.Label>
+                  <Form.Label>
+                    <strong>Password *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="password"
                     name="password"

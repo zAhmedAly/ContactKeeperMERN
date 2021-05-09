@@ -87,7 +87,6 @@ const Header = ({ history }) => {
               activeClassName="selected"
               activeStyle={{
                 fontWeight: "bold",
-                color: "yellow",
               }}
             >
               <Nav.Link>About</Nav.Link>

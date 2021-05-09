@@ -79,7 +79,9 @@ const ResetPassword = ({ history, location }) => {
             <Card.Body>
               <Form onSubmit={onSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address *</Form.Label>
+                  <Form.Label>
+                    <strong>Email address *</strong>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="email"

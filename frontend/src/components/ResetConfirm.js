@@ -35,6 +35,8 @@ const ResetConfirm = ({ resetToken }) => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
+  const [submitted, setSubmitted] = useState(false);
+
   const onChange = (e) => {
     setResetPasswordData({ ...resetPassword, [e.target.name]: e.target.value });
   };
@@ -50,6 +52,7 @@ const ResetConfirm = ({ resetToken }) => {
 
   useEffect(() => {
     if (error) {
+      setSubmitted(false);
       let errMsg = error;
       if (error === "Internal Server Error") {
         errMsg = `Not able to connect, Please try again`;
@@ -57,6 +60,7 @@ const ResetConfirm = ({ resetToken }) => {
       setAlert(errMsg, "danger");
       clearErrors();
     } else if (message) {
+      setSubmitted(true);
       setAlert(message, "success", 10000);
       clearMessages();
     }
@@ -84,62 +88,79 @@ const ResetConfirm = ({ resetToken }) => {
   return (
     <>
       {loading && <div id="cover-spin"></div>}
-
-      {resetToken && (
-        <Row>
-          <Col></Col>
-          <Col md={6}>
-            <h2
-              className="my-2"
-              style={{ color: "darkblue", textAlign: "center" }}
-            >
-              <strong>Reset Your Password</strong>
-            </h2>
-            <Alerts />
-            <Card className="mb-3">
-              <Card.Body>
-                <Form onSubmit={onSubmit}>
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password *</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      value={password}
-                      placeholder="Enter New Password ..."
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="formBasicCPassword">
-                    <Form.Label>Confirm Password *</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="cpassword"
-                      value={cpassword}
-                      placeholder="Confirm Password ..."
-                      onChange={onChange}
-                    />
-                  </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block"
-                    disabled={!password || !cpassword}
-                  >
-                    {loading ? "Saving ..." : "Reset Password"}
-                  </Button>
-                  <Button
-                    variant="light"
-                    onClick={Cancel}
-                    className="btn-block"
-                  >
-                    Cancel
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col></Col>
-        </Row>
+      {submitted && !error ? (
+        <div className="text-center" style={{ marginTop: "10%" }}>
+          <Row>
+            <Col />
+            <Col md={6}>
+              <h4>
+                Reset Password Success, please <a href="/login"> Relogin </a>
+              </h4>
+            </Col>
+            <Col />
+          </Row>
+        </div>
+      ) : (
+        resetToken && (
+          <Row>
+            <Col></Col>
+            <Col md={6}>
+              <h2
+                className="my-2"
+                style={{ color: "darkblue", textAlign: "center" }}
+              >
+                <strong>Reset Your Password</strong>
+              </h2>
+              <Alerts />
+              <Card className="mb-3">
+                <Card.Body>
+                  <Form onSubmit={onSubmit}>
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Label>
+                        <strong>New Password *</strong>
+                      </Form.Label>
+                      <Form.Control
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Enter New Password ..."
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCPassword">
+                      <Form.Label>
+                        <strong>Confirm Password *</strong>
+                      </Form.Label>
+                      <Form.Control
+                        type="password"
+                        name="cpassword"
+                        value={cpassword}
+                        placeholder="Confirm Password ..."
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="btn-block"
+                      disabled={!password || !cpassword}
+                    >
+                      {loading ? "Saving ..." : "Reset Password"}
+                    </Button>
+                    <Button
+                      variant="light"
+                      onClick={Cancel}
+                      className="btn-block"
+                    >
+                      Cancel
+                    </Button>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col></Col>
+          </Row>
+        )
       )}
     </>
   );
