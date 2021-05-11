@@ -68,10 +68,10 @@ const Contacts = () => {
   return (
     <>
       {(contactsLoading || deleteLoading) && <div id="cover-spin"></div>}
-      <h3
+      <h2
         style={{
           color: "darkblue",
-          fontWeight: "bold",
+          // fontWeight: "bold",
           alignContent: "center",
           justifyContent: "center",
           margin: "0.5rem 0",
@@ -89,7 +89,7 @@ const Contacts = () => {
                 textAlign: "center",
                 alignContent: "center",
                 justifyContent: "center",
-                margin: " 0.3rem",
+                margin: " 0.4rem",
                 borderRadius: "5px",
                 // height: "1rem",
                 fontSize: "1rem",
@@ -102,7 +102,7 @@ const Contacts = () => {
                 : `${contacts.length} Contacts`}
             </Badge>
           )}
-      </h3>
+      </h2>
       <SearchContacts />
       {!contactsLoading && <Alerts />}
 
