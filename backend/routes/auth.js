@@ -134,7 +134,7 @@ router.post(
         <a href='${resetLink}'>Reset My Password</a>
         </h2>
         <hr>
-        <h3> This link expries in 10 mins</h3>
+        <h3> This link expries in 10 mins and can be used once</h3>
         <h3>If you did not request this link, ignore it.</h3>
         <hr>
         <p>Contact Keeper Admin</p>`,
