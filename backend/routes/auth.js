@@ -124,7 +124,7 @@ router.post(
       const resetLink = `${config.get("DOMAIN")}/reset-confirm/${resetToken}`;
       sendEmail({
         // to: user.email,
-        to: `"${user.name} ${user.email}`,
+        to: `"${user.name}" <${user.email}>`,
         subject: "Password Reset Request",
         message: `
         <p> Please Do not Reply to this email ...</p>
